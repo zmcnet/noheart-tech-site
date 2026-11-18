@@ -1,0 +1,368 @@
+/* 页脚 */
+.site-footer {
+    background-color: #f8fafc;
+    border-top: 1px solid #e8ecf1;
+    padding: 0 0 0;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.footer-main {
+    display: flex;
+    gap: 64px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid #e8ecf1;
+    justify-content: space-between;
+}
+
+.footer-logo-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding-top: 4px;
+}
+
+.footer-logo-img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.footer-logo-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a2332;
+    white-space: nowrap;
+}
+
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-copyright {
+    font-size: 13px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.footer-icp {
+    font-size: 13px;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.footer-icp:hover {
+    color: #5a6a7a;
+}
+
+.footer-beian {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.footer-gabeian {
+    font-size: 13px;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.footer-gabeian:hover {
+    color: #5a6a7a;
+}
+
+.gabeian-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ===== 技术支持区域 ===== */
+.footer-support {
+    padding: 20px 0 16px;
+    border-bottom: 1px solid #e8ecf1;
+    text-align: center;
+}
+
+.footer-support-title {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: 0 0 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.footer-support-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.footer-support-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-support-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.footer-support-icon-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.footer-support-item:hover .footer-support-icon-img {
+    transform: scale(1.1);
+}
+
+.footer-support-item:hover .sponsor-icon {
+    transform: scale(1.15);
+}
+
+.sponsor-icon {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    font-size: 22px;
+}
+
+body.dark-mode .sponsor-icon {
+    background: linear-gradient(135deg, #3a1a2a, #2a0d1a);
+}
+
+.sponsor-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.sponsor-name a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s ease;
+}
+
+.sponsor-name a:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+}
+
+body.dark-mode .sponsor-name a {
+    color: #4da3ff;
+}
+
+body.dark-mode .sponsor-name a:hover {
+    color: #80bfff;
+}
+
+.sponsor-sep {
+    color: #d0d8e0;
+    font-weight: 300;
+}
+
+body.dark-mode .sponsor-sep {
+    color: #3a4555;
+}
+
+.footer-support-info {
+    text-align: left;
+}
+
+.footer-support-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a2332;
+    margin: 0;
+    display: block;
+}
+
+.footer-support-name a {
+    color: #1a73e8;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.footer-support-name a:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+}
+
+.footer-support-desc {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: 1px 0 0;
+    display: block;
+}
+
+/* 英文模式下技术支持保持一行 */
+html[lang="en"] .footer-support-list {
+    gap: 18px;
+}
+
+html[lang="en"] .footer-support-desc {
+    white-space: nowrap;
+}
+
+/* 暗色模式 - 技术支持 */
+body.dark-mode .footer-support {
+    border-bottom-color: #1e2530;
+}
+
+body.dark-mode .footer-support-title {
+    color: #4a5568;
+}
+
+body.dark-mode .footer-support-name {
+    color: #e2e8f0;
+}
+
+body.dark-mode .footer-support-name a {
+    color: #4da3ff;
+}
+
+body.dark-mode .footer-support-name a:hover {
+    color: #80bfff;
+}
+
+body.dark-mode .footer-support-desc {
+    color: #4a5568;
+}
+
+/* 暗色模式 */
+body.dark-mode .site-footer {
+    background-color: #0d1117;
+    border-top-color: #1e2530;
+}
+
+body.dark-mode .footer-main {
+    border-bottom-color: #1e2530;
+}
+
+body.dark-mode .footer-logo-name {
+    color: #e2e8f0;
+}
+
+body.dark-mode .footer-col-title {
+    color: #e2e8f0;
+}
+
+body.dark-mode .footer-col a {
+    color: #8896a6;
+}
+
+body.dark-mode .footer-col a:hover {
+    color: #4da3ff;
+}
+
+body.dark-mode .footer-copyright {
+    color: #4a5568;
+}
+
+body.dark-mode .footer-icp {
+    color: #4a5568;
+}
+
+body.dark-mode .footer-icp:hover {
+    color: #8896a6;
+}
+
+body.dark-mode .footer-gabeian {
+    color: #4a5568;
+}
+
+body.dark-mode .footer-gabeian:hover {
+    color: #8896a6;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .footer-logo-side {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .footer-logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* 移动端一行平铺：5 项等宽，图标在上名称在下 */
+    .footer-support-list {
+        gap: 12px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .footer-support-item {
+        flex: 1;
+        min-width: 0;
+        flex-direction: column;
+        gap: 4px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-support-name {
+        font-size: 11px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    /* 移动端只显示图标+名称，隐藏简介 */
+    .footer-support-desc {
+        display: none;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        padding: 0 20px;
+    }
+
+}

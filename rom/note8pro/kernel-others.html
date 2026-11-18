@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../favicon.ico">
+    <title data-en="Other Kernels | Redmi Note 8 Pro | NoHeart Tech">其它内核 | 红米Note 8 Pro | 没有心科技</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+    <link rel="stylesheet" href="../../static/css/animations.css">
+    <link rel="stylesheet" href="../../static/css/search.css">
+    <style>
+        /* ===== 分区标题 ===== */
+        .rom-section {
+            margin-bottom: 64px;
+        }
+        .rom-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 6px;
+        }
+        .rom-section-title::before {
+            content: '';
+            width: 6px;
+            height: 26px;
+            border-radius: 3px;
+            background: #1a73e8;
+            flex-shrink: 0;
+        }
+        body.dark-mode .rom-section-title {
+            color: #e2e8f0;
+        }
+        .rom-section-desc {
+            font-size: 14px;
+            color: #5a6a7a;
+            margin: 0 0 24px;
+            padding-left: 16px;
+        }
+        body.dark-mode .rom-section-desc {
+            color: #8896a6;
+        }
+
+        /* ===== banner 图标 ===== */
+        .os-banner-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            background: #f0f6ff;
+            border-radius: 28px;
+        }
+        .os-banner-icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        body.dark-mode .os-banner-icon {
+            background: #1a2a4a;
+        }
+
+        /* ===== 返回链接 ===== */
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* ===== 版本表格 ===== */
+        .rom-table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e8ecf1;
+            border-radius: 14px;
+            background: #fff;
+        }
+        body.dark-mode .rom-table-wrap {
+            background: #161b22;
+            border-color: #2a3140;
+        }
+        .rom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 0;
+        }
+        .rom-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a6a7a;
+            background: #f4f6f9;
+            border-bottom: 1px solid #e8ecf1;
+        }
+        body.dark-mode .rom-table th {
+            background: #1f2733;
+            color: #8896a6;
+            border-bottom-color: #2a3140;
+        }
+        .rom-table td {
+            padding: 13px 16px;
+            color: #1a2332;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        body.dark-mode .rom-table td {
+            color: #e2e8f0;
+            border-bottom-color: #212a38;
+        }
+        .rom-table tbody tr {
+            transition: background 0.15s;
+        }
+        .rom-table tbody tr:hover {
+            background: #f8fafc;
+        }
+        body.dark-mode .rom-table tbody tr:hover {
+            background: #1c2430;
+        }
+        .rom-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .rom-table .col-index {
+            width: 56px;
+            color: #8896a6;
+        }
+        .rom-table .col-pkg {
+            font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 340px;
+        }
+        .rom-table .col-md5 {
+            font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 12px;
+            color: #5a6a7a;
+        }
+        body.dark-mode .rom-table .col-md5 {
+            color: #8896a6;
+        }
+        .rom-table .col-article a {
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 6px;
+            background: #1a73e8;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .rom-table .col-article a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(26, 115, 232, 0.35);
+        }
+        .rom-empty {
+            display: none;
+            padding: 48px 24px;
+            text-align: center;
+            color: #8896a6;
+            font-size: 14px;
+        }
+    /* ===== 包名气泡 ===== */
+        .pkg-tooltip {
+            position: fixed;
+            z-index: 9999;
+            background: #1a2332;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+            max-width: min(90vw, 600px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            pointer-events: none;
+            transform: translate(-50%, -100%);
+        }
+        body.dark-mode .pkg-tooltip {
+            background: #e2e8f0;
+            color: #1a2332;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="../../favicon.ico" alt="没有心科技" class="logo-icon">
+                <a href="../../index.html" class="logo-text" data-en="NoHeart Tech">没有心科技</a>
+            </div>
+            <div class="menu-section">
+                <nav class="main-menu">
+                    <a href="../../index.html" class="menu-item" data-en="Home">首页</a>
+                    <a href="../index.html" class="menu-item active" data-en="ROM">机型分区</a>
+                    <a href="../../tools/index.html" class="menu-item" data-en="Wuxin Tools">无心工具箱</a>
+                    <a href="#" class="menu-item" data-en="Community">社区论坛</a>
+                    <a href="../../docs/index.html" class="menu-item" data-en="Tutorial">教程文档</a>
+                    <a href="../../contact.html" class="menu-item" data-en="Contact">联系我们</a>
+                </nav>
+                <div class="custom-functions">
+                    <div class="search-box">
+                        <span class="search-box-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="搜索…" data-en="Search…" autocomplete="off">
+                        <div class="search-dropdown"></div>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle btn-press" aria-label="切换主题">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text" data-en="Light">主题</span>
+                    </button>
+                    <button id="hamburger-btn" class="hamburger-btn btn-press" aria-label="打开菜单">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <nav id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-title" data-en="Menu">菜单</span>
+            <button id="mobile-menu-close" class="mobile-menu-close btn-press" aria-label="关闭菜单">&times;</button>
+        </div>
+        <a href="../../index.html" class="mobile-menu-item" data-en="Home">首页</a>
+        <a href="../index.html" class="mobile-menu-item active" data-en="ROM">机型分区</a>
+        <a href="../../tools/index.html" class="mobile-menu-item" data-en="Wuxin Tools">无心工具箱</a>
+        <a href="#" class="mobile-menu-item" data-en="Community">社区论坛</a>
+        <a href="../../docs/index.html" class="mobile-menu-item" data-en="Tutorial">教程文档</a>
+        <a href="../../contact.html" class="mobile-menu-item" data-en="Contact">联系我们</a>
+        <div class="mobile-menu-search">
+            <span class="search-box-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="搜索…" data-en="Search…" autocomplete="off">
+            <div class="search-dropdown"></div>
+        </div>
+        <div class="mobile-menu-divider"></div>
+        <button id="mobile-theme-toggle" class="mobile-theme-toggle btn-press">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text" data-en="Light">切换主题</span>
+        </button>
+    </nav>
+
+    <main class="rom-detail-page">
+        <section class="banner" style="padding:64px 0 48px;">
+            <div class="banner-container" style="flex-direction:column;text-align:center;">
+                <div class="os-banner-icon hero-enter">🧩</div>
+                <h1 class="banner-title hero-enter" data-en="Other Kernels" style="font-size:40px;">其它内核</h1>
+                <p class="banner-desc hero-enter hero-enter-d1" data-en="More third-party kernels to explore" style="max-width:600px;margin:16px auto 0;">更多第三方内核，等你探索</p>
+                <a href="../note8pro.html" class="back-link hero-enter hero-enter-d2" data-en="←Back to Redmi Note 8 Pro">←返回红米Note 8 Pro</a>
+            </div>
+        </section>
+
+        <div class="rom-container" style="max-width:1200px;margin:0 auto;padding:0 24px 80px;">
+
+            <!-- ===== 版本列表 ===== -->
+            <section class="rom-section anim anim-fade-up">
+                <h2 class="rom-section-title" data-en="Versions">版本列表</h2>
+                <p class="rom-section-desc" data-en="More third-party kernel versions for Redmi Note 8 Pro">红米Note 8 Pro 更多第三方内核版本列表</p>
+
+                <div class="rom-table-wrap">
+                    <table class="rom-table">
+                        <thead>
+                            <tr>
+                                <th class="col-index" data-en="#">序号</th>
+                                <th data-en="Package Name">包名</th>
+                                <th data-en="Version">版本</th>
+                                <th data-en="Release Date">发布时间</th>
+                                <th data-en="MD5">MD5</th>
+                                <th data-en="Actions">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rom-tbody"></tbody>
+                    </table>
+                    <div id="rom-empty" class="rom-empty" data-en="No versions available yet.">暂无版本，敬请期待</div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- 技术支持 -->
+            <div class="footer-support">
+                <div class="footer-support-title" data-en="Technical Support">技术支持</div>
+                <div class="footer-support-list">
+                    <div class="footer-support-item">
+                        <img src="../../static/images/kybll.png" alt="空雨不流泪" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name sponsor-name">
+                                <a href="https://www.kybll.cn/" target="_blank" rel="noopener">空雨不流泪</a>
+                            </span>
+                            <span class="footer-support-desc" data-en="Where dreams begin">梦想起源，无限进步！</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/wuxin.jpg" alt="٩(*´躺平虾`*)۶" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name sponsor-name">
+                                <a href="https://wpa.qq.com/msgrd?v=3&uin=2096477910&site=qq&menu=yes" target="_blank" rel="noopener" data-en="٩(*´躺平虾`*)۶">٩(*´躺平虾`*)۶</a>
+                            </span>
+                            <span class="footer-support-desc" data-en="Miku fan">憨憨初音酱</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/ysyplat.webp" alt="YSYPLAT" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name"><a href="https://www.ysyplat.com/" target="_blank" rel="noopener" data-en="YSYPLAT">屿笙云平台</a></span>
+                            <span class="footer-support-desc" data-en="Server &amp; CDN">提供服务器与CDN加速支持</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/eo.png" alt="Edgeone" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name" data-en="Edgeone">Edgeone</span>
+                            <span class="footer-support-desc" data-en="DDoS &amp; acceleration">提供防御与加速支持</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/cf.png" alt="Cloudflare" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name" data-en="Cloudflare">Cloudflare</span>
+                            <span class="footer-support-desc" data-en="DDoS &amp; acceleration">提供防御与加速支持</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright" data-en="&copy; 2025-2026 NoHeart Tech. All Rights Reserved.">&copy; 2025-2026 没有心科技. All Rights Reserved.</p>
+                <div class="footer-beian" data-en=" ">
+                    <a class="footer-icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备2023036308号-9</a>
+                    <a class="footer-gabeian" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33019202003173" target="_blank" rel="noopener">
+                        <img src="../../static/images/gabeian.png" alt="" class="gabeian-icon">浙公网安备33019202003173号
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../static/js/theme.js"></script>
+    <script src="../../static/js/page-transition.js"></script>
+    <script src="../../static/js/animations.js"></script>
+    <script src="../../static/js/img-protect.js"></script>
+    <script src="../../static/js/config.js"></script>
+    <script src="../../static/js/i18n.js"></script>
+    <script src="../../static/js/search.js"></script>
+    <script>
+    // ============================================================
+    // 其它内核 - 版本列表 + 渲染
+    // 依赖: i18n.js (window.i18n) 提供语言判断、langchange 事件
+    // ============================================================
+    (function () {
+        'use strict';
+
+        // 版本数据（article 为文章页地址，md5 为校验值，后续填充）
+        var ROM_DATA = [];
+
+        var tbody = document.getElementById('rom-tbody');
+        var emptyEl = document.getElementById('rom-empty');
+
+        function render() {
+            var articleText = (window.i18n && window.i18n.isEn()) ? 'View Details' : '查看详情';
+            tbody.innerHTML = ROM_DATA.map(function (r) {
+                return '<tr>' +
+                    '<td class="col-index">' + r.idx + '</td>' +
+                    '<td class="col-pkg" title="' + r.pkg + '">' + r.pkg + '</td>' +
+                    '<td>' + r.ver + '</td>' +
+                    '<td>' + r.date + '</td>' +
+                    '<td class="col-md5">' + r.md5 + '</td>' +
+                    '<td class="col-article"><a href="' + r.article + '" class="btn-press">' + articleText + '</a></td>' +
+                    '</tr>';
+            }).join('');
+            emptyEl.style.display = ROM_DATA.length ? 'none' : 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            render();
+        });
+    })();
+    </script>
+    <script>
+    (function () {
+        'use strict';
+        var tip = null;
+        document.addEventListener('click', function (e) {
+            var target = e.target.closest('.col-pkg');
+            if (tip) { tip.remove(); tip = null; }
+            if (target) {
+                tip = document.createElement('div');
+                tip.className = 'pkg-tooltip';
+                tip.textContent = target.textContent;
+                var rect = target.getBoundingClientRect();
+                tip.style.left = (rect.left + rect.width / 2) + 'px';
+                tip.style.top = (rect.top - 8) + 'px';
+                document.body.appendChild(tip);
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

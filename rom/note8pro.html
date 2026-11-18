@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../favicon.ico">
+    <title data-en="Redmi Note 8 Pro | NoHeart Tech">红米Note 8 Pro | 没有心科技</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/animations.css">
+    <link rel="stylesheet" href="../static/css/search.css">
+    <style>
+        /* ===== 机型详情通用卡片 ===== */
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        @media (max-width: 768px) {
+            .device-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+        .device-card {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border: 1px solid #e8ecf1;
+            border-radius: 16px;
+            padding: 40px 32px 36px;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .device-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            border-color: #d0d8e0;
+        }
+        body.dark-mode .device-card {
+            background: #161b22;
+            border-color: #2a3140;
+        }
+        body.dark-mode .device-card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            border-color: #3a4555;
+        }
+        .device-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 10px;
+        }
+        body.dark-mode .device-name {
+            color: #e2e8f0;
+        }
+        .device-desc {
+            font-size: 14px;
+            color: #5a6a7a;
+            line-height: 1.7;
+            margin: 0 0 20px;
+        }
+        body.dark-mode .device-desc {
+            color: #8896a6;
+        }
+        .device-btn {
+            display: inline-block;
+            margin-top: auto; /* 按钮贴底，卡片对齐*/
+            padding: 10px 36px;
+            border-radius: 8px;
+            background: #1a73e8;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .device-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(26, 115, 232, 0.4);
+        }
+
+        /* ===== 分区标题 ===== */
+        .rom-section {
+            margin-bottom: 64px;
+        }
+        .rom-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 6px;
+        }
+        .rom-section-title::before {
+            content: '';
+            width: 6px;
+            height: 26px;
+            border-radius: 3px;
+            background: #1a73e8;
+            flex-shrink: 0;
+        }
+        body.dark-mode .rom-section-title {
+            color: #e2e8f0;
+        }
+        .rom-section-desc {
+            font-size: 14px;
+            color: #5a6a7a;
+            margin: 0 0 24px;
+            padding-left: 16px;
+        }
+        body.dark-mode .rom-section-desc {
+            color: #8896a6;
+        }
+
+        /* ===== 卡片图标 ===== */
+        .rom-card-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            background: #f0f6ff;
+            border-radius: 18px;
+        }
+        .rom-card-icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        body.dark-mode .rom-card-icon {
+            background: #1a2a4a;
+        }
+
+        /* ===== banner 机型图===== */
+        .device-banner-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin: 0 auto 16px;
+        }
+
+        /* ===== 返回链接 ===== */
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* ===== 内核网格） 列） ===== */
+        .kernel-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (max-width: 768px) {
+            .kernel-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .kernel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== 占位卡片（待补充内容）===== */
+        .rom-placeholder {
+            border-style: dashed;
+            border-color: #c5cdd8;
+        }
+        body.dark-mode .rom-placeholder {
+            border-color: #3a4555;
+        }
+        .rom-placeholder-grid {
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 769px) {
+            .rom-placeholder-grid {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="../favicon.ico" alt="没有心科技" class="logo-icon">
+                <a href="../index.html" class="logo-text" data-en="NoHeart Tech">没有心科技</a>
+            </div>
+            <div class="menu-section">
+                <nav class="main-menu">
+                    <a href="../index.html" class="menu-item" data-en="Home">首页</a>
+                    <a href="index.html" class="menu-item active" data-en="ROM">机型分区</a>
+                    <a href="../tools/index.html" class="menu-item" data-en="Wuxin Tools">无心工具箱</a>
+                    <a href="#" class="menu-item" data-en="Community">社区论坛</a>
+                    <a href="../docs/index.html" class="menu-item" data-en="Tutorial">教程文档</a>
+                    <a href="../contact.html" class="menu-item" data-en="Contact">联系我们</a>
+                </nav>
+                <div class="custom-functions">
+                    <div class="search-box">
+                        <span class="search-box-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="搜索…" data-en="Search…" autocomplete="off">
+                        <div class="search-dropdown"></div>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle btn-press" aria-label="切换主题">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text" data-en="Light">主题</span>
+                    </button>
+                    <button id="hamburger-btn" class="hamburger-btn btn-press" aria-label="打开菜单">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <nav id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-title" data-en="Menu">菜单</span>
+            <button id="mobile-menu-close" class="mobile-menu-close btn-press" aria-label="关闭菜单">&times;</button>
+        </div>
+        <a href="../index.html" class="mobile-menu-item" data-en="Home">首页</a>
+        <a href="index.html" class="mobile-menu-item active" data-en="ROM">机型分区</a>
+        <a href="../tools/index.html" class="mobile-menu-item" data-en="Wuxin Tools">无心工具箱</a>
+        <a href="#" class="mobile-menu-item" data-en="Community">社区论坛</a>
+        <a href="../docs/index.html" class="mobile-menu-item" data-en="Tutorial">教程文档</a>
+        <a href="../contact.html" class="mobile-menu-item" data-en="Contact">联系我们</a>
+        <div class="mobile-menu-search">
+            <span class="search-box-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="搜索…" data-en="Search…" autocomplete="off">
+            <div class="search-dropdown"></div>
+        </div>
+        <div class="mobile-menu-divider"></div>
+        <button id="mobile-theme-toggle" class="mobile-theme-toggle btn-press">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text" data-en="Light">切换主题</span>
+        </button>
+    </nav>
+
+    <main class="rom-detail-page">
+        <section class="banner" style="padding:64px 0 48px;">
+            <div class="banner-container" style="flex-direction:column;text-align:center;">
+                <img src="../static/images/redmi-note8pro.png" alt="红米Note 8 Pro" class="device-banner-img hero-enter">
+                <h1 class="banner-title hero-enter" data-en="Redmi Note 8 Pro" style="font-size:40px;">红米Note 8 Pro</h1>
+                <p class="banner-desc hero-enter hero-enter-d1" data-en="Release Date: 2019.08.29">发布日期：2019.08.29</p>
+                <a href="index.html" class="back-link hero-enter hero-enter-d2" data-en="←Back to Devices">←返回机型分区</a>
+            </div>
+        </section>
+
+        <div class="rom-container" style="max-width:1200px;margin:0 auto;padding:0 24px 80px;">
+
+            <!-- ===== ROM系统 ===== -->
+            <section class="rom-section anim anim-fade-up">
+                <h2 class="rom-section-title" data-en="ROM System">ROM系统</h2>
+                <p class="rom-section-desc" data-en="Choose the system that suits you">选择适合你的系统版本</p>
+                <div class="device-grid">
+
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon"><img src="../static/images/hyperos.png" alt="Hyper OS" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="HyperOS">Hyper OS</h3>
+                        <p class="device-desc" data-en="Xiaomi's new generation system, all-round evolution in performance and connectivity">小米全新一代系统，性能与互联全面进化</p>
+                        <a href="note8pro/hyperos.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+
+                    <div class="device-card card-lift anim anim-fade-up anim-delay-1">
+                        <div class="rom-card-icon"><img src="../static/images/coloros.png" alt="Color OS" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="ColorOS">Color OS</h3>
+                        <p class="device-desc" data-en="OPPO's deep customization, smoothness and aesthetics in one">OPPO 深度定制，流畅与美学并重</p>
+                        <a href="note8pro/coloros.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+
+                    <div class="device-card card-lift anim anim-fade-up anim-delay-2">
+                        <div class="rom-card-icon"><img src="../static/images/originos.png" alt="Origin OS" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="OriginOS">Origin OS</h3>
+                        <p class="device-desc" data-en="vivo's atomic design, a refreshing new experience">vivo 原子化设计，焕然一新</p>
+                        <a href="note8pro/originos.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+
+                    <div class="device-card card-lift anim anim-fade-up anim-delay-1">
+                        <div class="rom-card-icon"><img src="../static/images/MIUI.webp" alt="MIUI" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="MIUI">MIUI</h3>
+                        <p class="device-desc" data-en="Xiaomi's classic customized system, stable and practical">小米经典定制系统，稳定实用</p>
+                        <a href="note8pro/miui.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+
+                    <div class="device-card card-lift anim anim-fade-up anim-delay-2">
+                        <div class="rom-card-icon"><img src="../static/images/AOSP.png" alt="类原生" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="AOSP-based">类原生</h3>
+                        <p class="device-desc" data-en="Modified from stock Android, not the original AOSP">基于原生系统改版，非 AOSP 原版</p>
+                        <a href="note8pro/aosp.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon">📦</div>
+                        <h3 class="device-name" data-en="Others">其它</h3>
+                        <p class="device-desc" data-en="Original AOSP and more third-party systems to explore">AOSP 原版及更多第三方系统，等你探索</p>
+                        <a href="note8pro/others.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===== Kernel内核 ===== -->
+            <section class="rom-section anim anim-fade-up">
+                <h2 class="rom-section-title" data-en="Kernel">Kernel内核</h2>
+                <p class="rom-section-desc" data-en="Custom kernels, unlock the performance ceiling">自定义内核，解锁性能上限</p>
+                <div class="device-grid kernel-grid">
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon"><img src="../static/images/Suzakukernel.png" alt="Suzaku Kernel" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="Suzaku Kernel">朱雀内核</h3>
+                        <p class="device-desc" data-en="Community-acclaimed kernel with optimized scheduler and thermal control">社区口碑内核，调度与温控深度优化</p>
+                        <a href="note8pro/kernel-zhuque.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon">⚙️</div>
+                        <h3 class="device-name" data-en="Self-built Kernel">自编译内核</h3>
+                        <p class="device-desc" data-en="Build your own kernel with custom configurations">按需定制，自行编译专属内核</p>
+                        <a href="note8pro/kernel-selfbuilt.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon">🏷️</div>
+                        <h3 class="device-name" data-en="Official Kernel">官方内核</h3>
+                        <p class="device-desc" data-en="Xiaomi official kernel, stable and power-efficient">小米官方内核，稳定省电</p>
+                        <a href="note8pro/kernel-official.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon">🧩</div>
+                        <h3 class="device-name" data-en="Other Kernels">其它内核</h3>
+                        <p class="device-desc" data-en="More third-party kernels to explore">更多第三方内核，等你探索</p>
+                        <a href="note8pro/kernel-others.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== TWRP ===== -->
+            <section class="rom-section anim anim-fade-up">
+                <h2 class="rom-section-title" data-en="TWRP">TWRP</h2>
+                <p class="rom-section-desc" data-en="Custom recovery, a must-have for flashing">第三方恢复，刷机必备</p>
+                <div class="device-grid kernel-grid">
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon"><img src="../static/images/android9.png" alt="Android 9" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="Android 9">安卓 9</h3>
+                        <p class="device-desc" data-en="TWRP recovery for Android 9 Pie">适配 Android 9 Pie 的 TWRP 恢复镜像</p>
+                        <a href="note8pro/twrp-android9.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon"><img src="../static/images/android10.png" alt="Android 10" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="Android 10">安卓 10</h3>
+                        <p class="device-desc" data-en="TWRP recovery for Android 10 Quince Tart">适配 Android 10 的 TWRP 恢复镜像</p>
+                        <a href="note8pro/twrp-android10.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon"><img src="../static/images/android11.png" alt="Android 11" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="Android 11">安卓 11</h3>
+                        <p class="device-desc" data-en="TWRP recovery for Android 11 Red Velvet Cake">适配 Android 11 的 TWRP 恢复镜像</p>
+                        <a href="note8pro/twrp-android11.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon"><img src="../static/images/android12.png" alt="Android 12+" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="Android 12+">安卓 12+</h3>
+                        <p class="device-desc" data-en="TWRP recovery for Android 12 and above">适配 Android 12 及以上的 TWRP 恢复镜像</p>
+                        <a href="note8pro/twrp-android12.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== 其它工具 ===== -->
+            <section class="rom-section anim anim-fade-up">
+                <h2 class="rom-section-title" data-en="Other Tools">其它工具</h2>
+                <p class="rom-section-desc" data-en="More auxiliary tools for flashing">更多刷机辅助工具</p>
+                <div class="device-grid">
+                    <div class="device-card card-lift anim anim-fade-up">
+                        <div class="rom-card-icon">💾</div>
+                        <h3 class="device-name" data-en="System Partition Expansion">System 分区扩容</h3>
+                        <p class="device-desc" data-en="Expand the System partition for Redmi Note 8 Pro">红米Note 8 Pro System 分区扩容教程</p>
+                        <a href="note8pro/system-expand.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                    <div class="device-card card-lift anim anim-fade-up anim-delay-1">
+                        <div class="rom-card-icon"><img src="../static/images/googlecamera.webp" alt="Google Camera" class="rom-card-icon-img"></div>
+                        <h3 class="device-name" data-en="Google Camera">谷歌相机</h3>
+                        <p class="device-desc" data-en="Google Camera for Redmi Note 8 Pro">红米Note 8 Pro 谷歌相机配置</p>
+                        <a href="note8pro/gcamera.html" class="device-btn btn-press" data-en="Explore">继续深入</a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- 技术支持 -->
+            <div class="footer-support">
+                <div class="footer-support-title" data-en="Technical Support">技术支持</div>
+                <div class="footer-support-list">
+                    <div class="footer-support-item">
+                        <img src="../static/images/kybll.png" alt="空雨不流泪" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name sponsor-name">
+                                <a href="https://www.kybll.cn/" target="_blank" rel="noopener">空雨不流泪</a>
+                            </span>
+                            <span class="footer-support-desc" data-en="Where dreams begin">梦想起源，无限进步！</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../static/images/wuxin.jpg" alt="٩(*´躺平虾`*)۶" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name sponsor-name">
+                                <a href="https://wpa.qq.com/msgrd?v=3&uin=2096477910&site=qq&menu=yes" target="_blank" rel="noopener" data-en="٩(*´躺平虾`*)۶">٩(*´躺平虾`*)۶</a>
+                            </span>
+                            <span class="footer-support-desc" data-en="Miku fan">憨憨初音酱</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../static/images/ysyplat.webp" alt="YSYPLAT" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name"><a href="https://www.ysyplat.com/" target="_blank" rel="noopener" data-en="YSYPLAT">屿笙云平台</a></span>
+                            <span class="footer-support-desc" data-en="Server &amp; CDN">提供服务器与CDN加速支持</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../static/images/eo.png" alt="Edgeone" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name" data-en="Edgeone">Edgeone</span>
+                            <span class="footer-support-desc" data-en="DDoS &amp; acceleration">提供防御与加速支持</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../static/images/cf.png" alt="Cloudflare" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name" data-en="Cloudflare">Cloudflare</span>
+                            <span class="footer-support-desc" data-en="DDoS &amp; acceleration">提供防御与加速支持</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright" data-en="&copy; 2025-2026 NoHeart Tech. All Rights Reserved.">&copy; 2025-2026 没有心科技. All Rights Reserved.</p>
+                <div class="footer-beian" data-en=" ">
+                    <a class="footer-icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备2023036308号-9</a>
+                    <a class="footer-gabeian" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33019202003173" target="_blank" rel="noopener">
+                        <img src="../static/images/gabeian.png" alt="" class="gabeian-icon">浙公网安备33019202003173号
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/theme.js"></script>
+    <script src="../static/js/page-transition.js"></script>
+    <script src="../static/js/animations.js"></script>
+    <script src="../static/js/img-protect.js"></script>
+    <script src="../static/js/config.js"></script>
+    <script src="../static/js/i18n.js"></script>
+    <script src="../static/js/search.js"></script>
+</body>
+</html>

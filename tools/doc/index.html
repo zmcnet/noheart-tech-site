@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../favicon.ico">
+    <title data-en="Documentation | Wuxin Tools">使用文档 | 无心工具箱</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/doc.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+    <link rel="stylesheet" href="../../static/css/animations.css">
+    <link rel="stylesheet" href="../../static/css/search.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="../../favicon.ico" alt="没有心科技" class="logo-icon">
+                <a href="../../index.html" class="logo-text" data-en="NoHeart Tech">没有心科技</a>
+            </div>
+            <div class="menu-section">
+                <nav class="main-menu">
+                    <a href="../../index.html" class="menu-item" data-en="Home">首页</a>
+                    <a href="../../rom/index.html" class="menu-item" data-en="ROM">机型分区</a>
+                    <a href="../index.html" class="menu-item active" data-en="Wuxin Tools">无心工具箱</a>
+                    <a href="#" class="menu-item" data-en="Community">社区论坛</a>
+                    <a href="../../docs/index.html" class="menu-item" data-en="Tutorial">教程文档</a>
+                    <a href="../../contact.html" class="menu-item" data-en="Contact">联系我们</a>
+                </nav>
+                <div class="custom-functions">
+                    <div class="search-box">
+                        <span class="search-box-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="搜索" data-en="Search" autocomplete="off">
+                        <div class="search-dropdown"></div>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle btn-press" aria-label="切换主题">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text" data-en="Light">主题</span>
+                    </button>
+                    <button id="hamburger-btn" class="hamburger-btn btn-press" aria-label="打开菜单">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 移动端侧滑菜单 -->
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <nav id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-title" data-en="Menu">菜单</span>
+            <button id="mobile-menu-close" class="mobile-menu-close btn-press" aria-label="关闭菜单">&times;</button>
+        </div>
+        <a href="../../index.html" class="mobile-menu-item" data-en="Home">首页</a>
+        <a href="../../rom/index.html" class="mobile-menu-item" data-en="ROM">机型分区</a>
+        <a href="../index.html" class="mobile-menu-item active" data-en="Wuxin Tools">无心工具箱</a>
+        <a href="#" class="mobile-menu-item" data-en="Community">社区论坛</a>
+        <a href="../../docs/index.html" class="mobile-menu-item" data-en="Tutorial">教程文档</a>
+        <a href="../../contact.html" class="mobile-menu-item" data-en="Contact">联系我们</a>
+        <span class="mobile-menu-sub-label" data-en="Tools">工具</span>
+        <a href="../tools/index.html" class="mobile-menu-sub-item" data-en="Home">首页</a>
+        <a href="../tools/download.html" class="mobile-menu-sub-item" data-en="Download">下载中心</a>
+        <a href="../tools/doc/index.html" class="mobile-menu-sub-item active" data-en="Docs">使用文档</a>
+        <a href="../tools/update.html" class="mobile-menu-sub-item" data-en="Updates">更新日志</a>
+        <div class="mobile-menu-search">
+            <span class="search-box-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="搜索" data-en="Search" autocomplete="off">
+            <div class="search-dropdown"></div>
+        </div>
+        <div class="mobile-menu-divider"></div>
+        <button id="mobile-theme-toggle" class="mobile-theme-toggle btn-press">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text" data-en="Light">切换主题</span>
+        </button>
+    </nav>
+
+    <!-- 无心工具箱子导航 -->
+    <nav class="sub-nav">
+        <div class="sub-nav-inner">
+            <a href="../../tools/index.html" class="sub-nav-item" data-en="Home">首页</a>
+            <a href="../../tools/download.html" class="sub-nav-item" data-en="Download">下载中心</a>
+            <a href="../../tools/doc/index.html" class="sub-nav-item active" data-en="Docs">使用文档</a>
+            <a href="../../tools/update.html" class="sub-nav-item" data-en="Updates">更新日志</a>
+        </div>
+    </nav>
+
+    <main class="doc-page">
+        <!-- 文档头部 -->
+        <section class="doc-hero">
+            <h1 class="doc-hero-title" data-en="Documentation">使用文档</h1>
+            <p class="doc-hero-subtitle" data-en="Quick start guide for Wuxin Tools">快速上手无心工具箱，掌握每一项功能</p>
+            <div class="doc-search-wrap">
+                <span class="doc-search-icon">🔍</span>
+                <input type="text" class="doc-search" placeholder="搜索文档..." id="doc-search-input" data-en="Search documentation...">
+            </div>
+        </section>
+
+        <!-- 文档主体 -->
+        <div class="doc-main">
+            <!-- 侧边导航 -->
+            <aside class="doc-sidebar">
+                <div class="doc-nav-group">
+                    <div class="doc-nav-group-title" data-en="Quick Start">快速开始</div>
+                    <ul class="doc-nav-list">
+                        <li><a href="#quick-start" class="doc-nav-link active" data-en="Quick Start">快速入门</a></li>
+                        <li><a href="#install" class="doc-nav-link" data-en="Installation">安装与配置</a></li>
+                        <li><a href="#first-connect" class="doc-nav-link" data-en="First Connection">首次连接设备</a></li>
+                    </ul>
+                </div>
+                <div class="doc-nav-group">
+                    <div class="doc-nav-group-title" data-en="Features Guide">功能指南</div>
+                    <ul class="doc-nav-list">
+                        <li><a href="#dashboard" class="doc-nav-link" data-en="Dashboard">设备仪表盘</a></li>
+                        <li><a href="#partition" class="doc-nav-link" data-en="Partition">分区管理</a></li>
+                        <li><a href="#partition-normal" class="doc-nav-link" data-en="Partition Details">分区管理详情</a></li>
+                        <li><a href="#reboot" class="doc-nav-link" data-en="Reboot">重启管理</a></li>
+                        <li><a href="#filemanager" class="doc-nav-link" data-en="File Manager">文件管理</a></li>
+                        <li><a href="#extensions" class="doc-nav-link" data-en="Extensions">功能扩展</a></li>
+                    </ul>
+                </div>
+                <div class="doc-nav-group">
+                    <div class="doc-nav-group-title" data-en="Advanced">进阶</div>
+                    <ul class="doc-nav-list">
+                        <li><a href="#cmd" class="doc-nav-link" data-en="Command Line">命令行工具</a></li>
+                        <li><a href="#payload" class="doc-nav-link" data-en="Payload Unpacker">Payload解包</a></li>
+                        <li><a href="#selinux" class="doc-nav-link" data-en="SELinux Merger">SELinux规则合并</a></li>
+                        <li><a href="#faq" class="doc-nav-link" data-en="FAQ">常见问题</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 文档内容 -->
+            <div class="doc-content">
+                <!-- 快速入门 -->
+                <div class="doc-quick-grid">
+                    <a href="#quick-start" class="doc-quick-card">
+                        <div class="doc-quick-icon">🚀</div>
+                        <h3 data-en="Quick Start">快速入门</h3>
+                        <p data-en="From installation to first use, get started in 5 minutes">从安装到首次使用，5分钟上手</p>
+                    </a>
+                    <a href="#partition" class="doc-quick-card">
+                        <div class="doc-quick-icon">🗂</div>
+                        <h3 data-en="Partition Management">分区管理</h3>
+                        <p data-en="Complete guide for normal and dynamic partitions">普通分区与动态分区的完整操作指南</p>
+                    </a>
+                    <a href="#faq" class="doc-quick-card">
+                        <div class="doc-quick-icon">❓</div>
+                        <h3 data-en="FAQ">常见问题</h3>
+                        <p data-en="Having issues? Check here first">遇到问题？先看看这里有没有答案</p>
+                    </a>
+                </div>
+
+                <!-- 快速入门 -->
+                <div class="doc-section anim anim-fade-up" id="quick-start">
+                    <h2 class="doc-section-title" data-en="Quick Start">快速入门<a href="#quick-start" class="doc-anchor">#</a></h2>
+                    <p data-en="Wuxin Tools is an Android device management tool based on ADB and Fastboot protocols, providing a graphical interface for flashing, partition management, file operations and more without needing to memorize command lines.">无心工具箱是一款基于ADB和Fastboot协议的Android设备管理工具，提供图形化界面，无需记忆命令行即可完成刷机、分区管理、文件操作等任务。</p>
+                    <div class="doc-tip doc-tip-info">
+                        💡 <span data-en="It is recommended to enable <strong>USB Debugging</strong> and <strong>OEM Unlock</strong> on your device before use. Path: Settings → About Phone → Tap Build Number 7 times → Developer Options → USB Debugging / OEM Unlock.">建议在使用前开启设备的 <strong>USB调试</strong> 和 <strong>OEM解锁</strong> 选项，路径为：设置 → 关于手机 → 连续点击版本号7次 → 开发者选项 → USB调试 / OEM解锁。</span>
+                    </div>
+                </div>
+
+                <!-- 安装与配置 -->
+                <div class="doc-section anim anim-fade-up" id="install">
+                    <h2 class="doc-section-title" data-en="Installation & Configuration">安装与配置<a href="#install" class="doc-anchor">#</a></h2>
+                    <p data-en="Wuxin Tools is a Windows platform application. Download the installer and run it to complete the installation.">无心工具箱为 Windows 平台应用，下载安装程序后运行即可完成安装。</p>
+                    <ol>
+                        <li data-en="Go to the <strong>Download Page</strong> to get the latest version installer">前往 <strong>下载页面</strong> 获取最新版本安装程序</li>
+                        <li data-en="Double-click the installer and follow the prompts to complete installation">双击运行安装程序，按提示完成安装</li>
+                        <li data-en="After installation, launch <strong>Wuxin Tools</strong> from the desktop or Start menu">安装完成后，从桌面或开始菜单启动 <strong>无心工具箱</strong></li>
+                        <li data-en="On first run, Windows may display a security warning. Click 'More Info' → 'Run Anyway'">首次运行时，Windows 可能弹出安全提示，点击「更多信息」→「仍要运行」</li>
+                    </ol>
+                    <div class="doc-tip doc-tip-info">
+                        💡 <span data-en="The toolbox supports auto-flashing by double-clicking .img image files, and will auto-associate file formats after installation.">工具箱支持双击.img 镜像文件自动刷入，安装后会自动关联文件格式。</span>
+                    </div>
+                    <div class="doc-tip doc-tip-warn">
+                        ⚠️ <span data-en="If antivirus software blocks the installation, please add it to the whitelist. The toolbox contains no malware; any detection is a false positive.">安装时如遇杀毒软件拦截，请添加信任。工具箱不含任何恶意代码，拦截为误报。</span>
+                    </div>
+                </div>
+
+                <!-- 首次连接设备 -->
+                <div class="doc-section anim anim-fade-up" id="first-connect">
+                    <h2 class="doc-section-title" data-en="First Device Connection">首次连接设备<a href="#first-connect" class="doc-anchor">#</a></h2>
+                    <p data-en="Before connecting your device, please ensure the following preparations are completed:">连接设备前，请确保已完成以下准备工作：</p>
+                    <ul>
+                        <li data-en="<strong>USB Debugging</strong> is enabled on your phone">手机已开启 <strong>USB调试</strong></li>
+                        <li data-en="Connect using a data cable (some cables only support charging, ensure it supports data transfer)">使用数据线连接电脑（部分线缆仅支持充电，请确认支持数据传输）</li>
+                        <li data-en="When the 'Allow USB Debugging' prompt appears on your phone, check 'Always allow' and tap 'OK'">手机弹出「允许USB调试」提示时，勾选「始终允许」并点击「确定」</li>
+                    </ul>
+                    <p data-en="After a successful connection, the toolbox will automatically detect the device, and the dashboard will display device information in real-time. If the device is not recognized, try:">连接成功后，工具箱将自动检测设备，仪表盘页面会实时显示设备信息。若设备未识别，可尝试：</p>
+                    <ol>
+                        <li data-en="Click <strong>Install Driver</strong> to install the Android USB driver">点击 <strong>安装驱动</strong> 安装 Android USB 驱动</li>
+                        <li data-en="Try a different data cable or USB port">更换数据线或USB接口</li>
+                        <li data-en="Check the device status in Device Manager">在设备管理器中检查设备状态</li>
+                    </ol>
+                </div>
+
+                <!-- 设备仪表盘 -->
+                <div class="doc-section anim anim-fade-up" id="dashboard">
+                    <h2 class="doc-section-title" data-en="Device Dashboard">设备仪表盘<a href="#dashboard" class="doc-anchor">#</a></h2>
+                    <p data-en="The dashboard is the home page of the toolbox. Once a device is connected, it automatically reads and displays the following information:">仪表盘是工具箱的首页，连接设备后自动读取并展示以下信息：</p>
+                    <ul>
+                        <li data-en="<strong>CPU Core Utilization / Real-time Frequency</strong> → Visual display of each core's load"><strong>CPU核心利用率 / 实时频率</strong> → 可视化展示各核心负载</li>
+                        <li data-en="<strong>Device Model, Android Version, Manufacturer</strong>"><strong>设备型号、Android版本、厂商</strong></li>
+                        <li data-en="<strong>Serial Number, CPU Architecture, SoC Model</strong>"><strong>序列号、CPU架构、SoC型号</strong></li>
+                        <li data-en="<strong>Memory Size, Storage Space</strong> → Including used/available space"><strong>内存大小、存储空间</strong> → 含已用/可用空间</li>
+                        <li data-en="<strong>Battery Status, Network Type, Screen Resolution</strong>"><strong>电池状态、网络类型、屏幕分辨率</strong></li>
+                    </ul>
+                    <p data-en="All data refreshes in real-time with no manual operation required.">所有数据实时刷新，无需手动操作。</p>
+                </div>
+
+                <!-- 分区管理 -->
+                <div class="doc-section anim anim-fade-up" id="partition">
+                    <h2 class="doc-section-title" data-en="Partition Management">分区管理<a href="#partition" class="doc-anchor">#</a></h2>
+                    <p data-en="Partition management is divided into two modules: <strong>Normal Partition Management</strong> and <strong>Dynamic Partition Management</strong>.">分区管理分为 <strong>普通分区管理</strong> 和 <strong>动态分区管理</strong> 两个模块。</p>
+
+                    <h3 style="font-size:17px;font-weight:600;color:#1a2332;margin:20px 0 10px;" data-en="Normal Partition Management">普通分区管理</h3>
+                    <p data-en="Suitable for devices with traditional partition layouts, supporting the following operations:">适用于传统分区结构的设备，支持以下操作：</p>
+                    <ul>
+                        <li data-en="<strong>Flash Partition</strong> → Write .img image files to a specified partition"><strong>刷写分区</strong> → 将 .img 镜像文件写入指定分区</li>
+                        <li data-en="<strong>Erase Partition</strong> → Clear data from a specified partition"><strong>擦除分区</strong> → 清除指定分区的数据</li>
+                        <li data-en="<strong>Format Data</strong> → Reset the user data partition"><strong>格式化数据</strong> → 重置用户数据分区</li>
+                        <li data-en="<strong>Remove AVB2.0 Verification</strong> → Disable Android Verified Boot"><strong>去除AVB2.0验证</strong> → 解除Android Verified Boot校验</li>
+                        <li data-en="<strong>Switch Slot</strong> → Switch between A/B system partitions"><strong>切换槽位</strong> → 在A/B双系统分区间切换</li>
+                        <li data-en="<strong>Remove FRP Lock</strong> → Bypass Google Factory Reset Protection"><strong>去除FRP锁</strong> → 绕过谷歌工厂重置保护</li>
+                        <li data-en="<strong>Unlock/Lock BL</strong> → Control the Bootloader lock state"><strong>解锁/上锁BL</strong> → 控制Bootloader的锁定状态</li>
+                    </ul>
+
+                    <h3 style="font-size:17px;font-weight:600;color:#1a2332;margin:20px 0 10px;" data-en="Dynamic Partition Management">动态分区管理</h3>
+                    <p data-en="Designed for devices with Dynamic Partitions, additionally supporting:">专为搭载动态分区（Dynamic Partition）的设备设计，在普通分区功能基础上额外支持：</p>
+                    <ul>
+                        <li data-en="<strong>Resize Logical Partitions</strong> → Flexibly allocate space within the super partition"><strong>调整逻辑分区大小</strong> → 灵活分配super分区内的空间</li>
+                        <li data-en="<strong>Logical Partition Management</strong> → Create, delete, and configure logical partitions"><strong>逻辑分区管理</strong> → 创建、删除与配置逻辑分区</li>
+                    </ul>
+
+                    <div class="doc-tip doc-tip-danger">
+                        🔴 <span data-en="Partition operations carry risks. Incorrect flashing or erasing may cause the device to fail to boot. Please back up important data before proceeding, and ensure the correct partition and image file are selected.">分区操作具有风险，错误的刷写或擦除可能导致设备无法启动。操作前请务必备份重要数据，并确认选择了正确的分区和镜像文件。</span>
+                    </div>
+                </div>
+
+                <!-- 普通分区管理详情 -->
+                <div class="doc-section anim anim-fade-up" id="partition-normal">
+                    <h2 class="doc-section-title" data-en="Normal Partition Management Details">普通分区管理详情<a href="#partition-normal" class="doc-anchor">#</a></h2>
+
+                    <h3 data-en="Quick Start">快速入门</h3>
+                    <p data-en="This tool helps you manage partitions on Android devices, including flashing images, erasing partitions, unlocking/locking BL, etc. The tool has built-in fastboot functionality, no additional installation required.">本工具可以帮助您管理Android设备的分区，包括刷入镜像、擦除分区、解锁/上锁BL等功能。工具已内置fastboot功能，无需额外安装。</p>
+                    <p><strong data-en="Before using, please ensure:">使用前请确保：</strong></p>
+                    <ul>
+                        <li data-en="The device is in Fastboot mode">设备已进入Fastboot模式</li>
+                        <li data-en="Use a good quality data cable">使用质量好的数据线</li>
+                    </ul>
+                    <p><strong data-en="Basic Operation Steps:">基本操作流程：</strong></p>
+                    <ol>
+                        <li data-en="Put the phone into Fastboot mode (hold Volume Down + Power after power-off)">将手机进入Fastboot模式（关机后按住音量减+电源键）</li>
+                        <li data-en="Connect the phone to the computer with a data cable">用数据线连接手机和电脑</li>
+                        <li data-en="Click [Read Device Info] to get device information">点击【读取设备信息】获取设备信息</li>
+                        <li data-en="Click [Read Partition List] to view all available partitions">点击【读取分区列表】查看所有可用分区</li>
+                        <li data-en="Select the partition to flash, erase, or format as needed">根据需要选择要刷入、擦除或格式化的分区</li>
+                        <li data-en="Click the corresponding button to execute the operation">点击对应按钮执行操作</li>
+                    </ol>
+
+                    <div class="doc-tip doc-tip-info">
+                        💡 <span data-en="Supports right-click menu to directly flash image files, highly automated and convenient! Right-click on <code>.img</code> / <code>.bin</code> / <code>.elf</code> files, select [Flash with Wuxin Tools], or double-click the file to auto-jump to flashing.">支持右键菜单直接刷入镜像文件，自动化程度高，操作更便捷！在 <code>.img</code> / <code>.bin</code> / <code>.elf</code> 文件上右键点击，选择【使用无心工具箱刷入】，或直接双击文件即可自动跳转刷入。</span>
+                    </div>
+
+                    <h3 data-en="Right-Click Menu Auto-Flash">右键菜单自动刷入</h3>
+                    <p data-en="Key highlights:">核心亮点：</p>
+                    <ul>
+                        <li data-en="<strong>Smart Partition Recognition</strong> → Automatically extract partition name from file name (e.g., <code>boot.img</code> recognized as <code>boot</code> partition)"><strong>智能分区识别</strong> → 自动从文件名提取分区名（如 <code>boot.img</code> 识别为 <code>boot</code> 分区）</li>
+                        <li data-en="<strong>Automatic Device Detection</strong> → Automatically detects device connection status, no manual operation needed"><strong>自动设备检测</strong> → 自动检测设备连接状态，无需手动操作</li>
+                        <li data-en="<strong>Smart Partition Matching</strong> → Supports direct matching and A/B slot smart matching"><strong>智能分区匹配</strong> → 支持直接匹配和A/B槽位智能匹配</li>
+                        <li data-en="<strong>Dynamic Partition Support</strong> → Automatically identifies dynamic partition devices and intelligently selects flashing strategy"><strong>动态分区支持</strong> → 自动识别动态分区设备，智能选择刷入策略</li>
+                        <li data-en="<strong>A/B Slot Handling</strong> → Automatically determines whether to flash both A/B slots"><strong>A/B槽位处理</strong> → 自动判断是否需要刷入A/B两个槽位</li>
+                        <li data-en="<strong>Singleton Mode</strong> → Ensures only one program instance runs, avoiding conflicts"><strong>单例模式</strong> → 确保只有一个程序实例运行，避免冲突</li>
+                    </ul>
+                    <p><strong data-en="Smart Recognition Mechanism:">智能识别机制：</strong></p>
+                    <ul>
+                        <li data-en="Direct match: <code>boot.img</code> → <code>boot</code> partition">直接匹配：<code>boot.img</code> → <code>boot</code> 分区</li>
+                        <li data-en="A/B slot match: <code>boot.img</code> → <code>boot_a</code> partition (current slot)">A/B槽位匹配：<code>boot.img</code> → <code>boot_a</code> 分区（当前槽位）</li>
+                        <li data-en="Supported formats: <code>.img</code>, <code>.bin</code>, <code>.elf</code>">支持格式：<code>.img</code>、<code>.bin</code>、<code>.elf</code></li>
+                        <li data-en="Case insensitive: <code>BOOT.img</code> → <code>boot</code> partition">大小写不敏感：<code>BOOT.img</code> → <code>boot</code> 分区</li>
+                        <li data-en="Underscore support: <code>system_ext.img</code> → <code>system_ext</code> partition">下划线支持：<code>system_ext.img</code> → <code>system_ext</code> 分区</li>
+                    </ul>
+                    <p><strong data-en="A/B Slot Smart Handling:">A/B槽位智能处理：</strong></p>
+                    <ul>
+                        <li data-en="Dynamic partition devices: If A/B slot partitions are matched, auto-check [Flash AB]; <code>super</code> and <code>cust</code> partitions are handled specially, only flashing the current slot">动态分区设备：如果匹配到A/B槽位分区，自动勾选【刷入AB】；<code>super</code> 和 <code>cust</code> 分区特殊处理，只刷入当前槽位</li>
+                        <li data-en="Non-dynamic partition devices: Directly flash the matched partition, no A/B slot handling involved">非动态分区设备：直接刷入匹配的分区，不涉及A/B槽位处理</li>
+                    </ul>
+                    <p data-en="If auto-recognition fails, the program provides a fallback: a partition selection dialog will appear, allowing users to manually select the target partition.">如果自动识别失败，程序会提供回退方案：显示分区选择对话框，用户可以手动选择目标分区。</p>
+
+                    <h3 data-en="Basic Concepts">基础概念</h3>
+                    <p><strong data-en="What is Fastboot Mode?">什么是Fastboot模式？</strong><br><span data-en="Fastboot is a special mode of Android devices used for flashing operations.">Fastboot是Android设备的特殊模式，用于刷机操作。</span></p>
+                    <ul>
+                        <li data-en="How to enter: With the phone powered off, hold [Volume Down] and [Power] simultaneously until the Fastboot interface appears">进入方法：手机关机后，同时按住【音量减键】和【电源键】不放，直到进入Fastboot界面</li>
+                        <li data-en="How to exit: Hold the Power button for 10+ seconds, or use <code>fastboot reboot</code> command to restart">退出方法：按住电源键10秒以上，或使用 <code>fastboot reboot</code> 命令重启</li>
+                    </ul>
+                    <p><strong data-en="What is a Partition?">什么是分区？</strong><br><span data-en="The Android system divides storage space into multiple areas, each called a partition.">Android系统将存储空间划分为多个区域，每个区域称为分区。</span></p>
+                    <ul>
+                        <li data-en="Dynamic partition devices: Have a <code>super</code> partition as a container, <code>system</code>, <code>vendor</code>, <code>product</code> etc. are logical partitions inside <code>super</code>, can resize dynamically, requires Fastbootd mode">动态分区设备：有 <code>super</code> 分区作为容器，<code>system</code>、<code>vendor</code>、<code>product</code> 等作为逻辑分区在 <code>super</code> 内部，可以动态调整分区大小，需要使用Fastbootd模式操作</li>
+                        <li data-en="Non-dynamic partition devices: No <code>super</code> partition, <code>boot</code>, <code>system</code>, <code>vendor</code> etc. are independent physical partitions with fixed sizes, operate directly in Fastboot mode">非动态分区设备：没有 <code>super</code> 分区，<code>boot</code>、<code>system</code>、<code>vendor</code> 等都是独立的物理分区，分区大小固定，直接在Fastboot模式操作</li>
+                    </ul>
+                    <p><strong data-en="Common Partitions:">常见分区：</strong></p>
+                    <ul>
+                        <li data-en="<code>boot</code>: Boot partition, contains kernel and boot files"><code>boot</code>：启动分区，包含内核和启动文件</li>
+                        <li data-en="<code>system</code>: System partition, contains Android system files (non-dynamic partitions)"><code>system</code>：系统分区，包含Android系统文件（非动态分区）</li>
+                        <li data-en="<code>vendor</code>: Vendor partition, contains vendor-specific drivers and configurations (non-dynamic partitions)"><code>vendor</code>：厂商分区，包含厂商定制的驱动和配置（非动态分区）</li>
+                        <li data-en="<code>super</code>: Super partition, contains multiple logical partitions (dynamic partitions)"><code>super</code>：超级分区，包含多个逻辑分区（动态分区）</li>
+                        <li data-en="<code>userdata</code>: Data partition, stores user data and app data"><code>userdata</code>：数据分区，存储用户数据和应用数据</li>
+                        <li data-en="<code>recovery</code>: Recovery partition, contains recovery mode programs"><code>recovery</code>：恢复分区，包含恢复模式程序</li>
+                    </ul>
+                    <p><strong data-en="What is BL Lock?">什么是BL锁？</strong><br><span data-en="BL lock (Bootloader lock) is a security mechanism set by manufacturers. When locked, non-official systems cannot be flashed. After unlocking, you can flash third-party systems, gain Root access, etc. Unlocking BL will erase all data, and some banking apps may not work after unlocking.">BL锁（Bootloader锁）是厂商设置的安全机制。锁定状态下无法刷入非官方系统，解锁后可以刷入第三方系统、获取Root权限等。解锁BL锁会清除所有数据，解锁后部分银行应用可能无法使用。</span></p>
+                    <p><strong data-en="What is FRP Lock?">什么是FRP锁？</strong><br><span data-en="FRP (Factory Reset Protection) is Google's account lock mechanism. After a factory reset, the Google account previously logged in must be entered to use the device. Removing the FRP lock bypasses this verification. Only use this to recover ownership of your own device, do not use for illegal purposes.">FRP（Factory Reset Protection）是谷歌的账号锁机制。当设备恢复出厂设置后，需要输入之前登录的谷歌账号才能使用。去除FRP锁可以绕过这个验证，重新激活设备。仅用于恢复自己设备的所有权，请勿用于非法用途。</span></p>
+                    <p><strong data-en="What is AVB Verification?">什么是AVB校验？</strong><br><span data-en="AVB (Android Verified Boot) is Android's boot verification mechanism. When AVB is enabled, the system verifies the integrity of each partition. If a partition is modified, the system will not boot. Removing AVB verification allows flashing modified system images but reduces system security.">AVB（Android Verified Boot）是Android的启动验证机制。开启AVB时，系统会验证每个分区的完整性，如果分区被修改则无法启动。去除AVB校验后可以刷入修改过的系统镜像，但会降低系统安全性。</span></p>
+                    <p><strong data-en="What are A/B Partitions?">什么是A/B分区？</strong><br><span data-en="Modern Android devices use the A/B partition scheme, where each partition has two copies (Slot A and Slot B). System updates are installed on the inactive slot, then switch to the new slot upon success. If the update fails, it can roll back to the old slot.">现代Android设备采用A/B分区机制，每个分区都有两个副本（A槽和B槽）。系统更新时在非活动槽位安装更新，更新成功后切换到新槽位，如果更新失败可以回退到旧槽位。</span></p>
+
+                    <h3 data-en="Device Connection">设备连接</h3>
+                    <ol>
+                        <li data-en="Power off the phone">将手机关机</li>
+                        <li data-en="Hold [Volume Down] and [Power] simultaneously">同时按住【音量减键】和【电源键】不放</li>
+                        <li data-en="Wait until the Fastboot interface appears (usually a robot or text)">直到屏幕显示Fastboot界面（通常是机器人或文字）</li>
+                        <li data-en="Connect the phone to the computer with a data cable">用数据线连接手机和电脑</li>
+                        <li data-en="Click [Read Device Info] to confirm successful connection">点击【读取设备信息】确认连接成功</li>
+                    </ol>
+                    <div class="doc-tip doc-tip-warn">
+                        ⚠️ <span data-en="Use original or high-quality data cables; poor quality cables may cause unstable connections. Do not disconnect the data cable during operation, and ensure the device has sufficient battery (recommended above 50%).">使用原装或质量好的数据线，劣质数据线可能导致连接不稳定。操作过程中请勿断开数据线，确保设备电量充足（建议50%以上）。</span>
+                    </div>
+                </div>
+
+                <!-- 动态分区管理详情 -->
+                <div class="doc-section anim anim-fade-up" id="partition-dynamic">
+                    <h2 class="doc-section-title" data-en="Dynamic Partition Management Details">动态分区管理详情<a href="#partition-dynamic" class="doc-anchor">#</a></h2>
+                    <p data-en="Dynamic partitions are a new partition management mechanism introduced in Android 10. Unlike traditional partitions, dynamic partitions consolidate all partitions (system, vendor, product, etc.) into one large partition called <code>super</code>. This allows flexible adjustment of partition sizes without repartitioning.">动态分区（Dynamic Partitions）是Android 10引入的新型分区管理机制。与传统分区不同，动态分区将所有分区（system、vendor、product等）合并为一个大的分区 <code>super</code> 分区内，可以灵活调整各分区大小，无需重新分区。</p>
+                    <p><strong data-en="Basic Concepts">基本概念</strong></p>
+                    <ul>
+                        <li data-en="<code>super</code> partition: A container partition containing all logical partitions"><code>super</code> 分区：容器分区，包含所有逻辑分区</li>
+                        <li data-en="Logical partitions: system, vendor, product, odm, etc., all inside super">逻辑分区：system、vendor、product、odm等，全部在super内部</li>
+                        <li data-en="<code>group</code>: A group of logical partitions that share a space quota"><code>group</code>：一组逻辑分区，共享空间配额</li>
+                    </ul>
+                    <p><strong data-en="How to Use Dynamic Partition Mode">如何使用动态分区模式</strong></p>
+                    <ol>
+                        <li data-en="Enter Fastbootd mode (for dynamic partition devices) or Fastboot mode">进入Fastbootd模式（动态分区设备）或Fastboot模式</li>
+                        <li data-en="In the partition management section, select the [Dynamic Partition] tab">在分区管理中选择【动态分区】标签页</li>
+                        <li data-en="View current logical partition layout and size">查看当前逻辑分区布局和大小</li>
+                        <li data-en="Resize, create, or delete logical partitions as needed">根据需要调整、创建或删除逻辑分区</li>
+                        <li data-en="Flash modified images">刷入修改后的镜像</li>
+                    </ol>
+
+                    <h3 data-en="Resize Partitions">调整分区大小</h3>
+                    <ol>
+                        <li data-en="In the dynamic partition interface, select the logical partition to resize">在动态分区界面选择要调整大小的逻辑分区</li>
+                        <li data-en="Click [Resize] to open the size adjustment dialog">点击【调整大小】按钮，打开大小调整对话框</li>
+                        <li data-en="Enter a new size (supports MB/GB units)">输入新的分区大小（支持MB/GB单位）</li>
+                        <li data-en="Click [OK] to confirm the operation">点击【确定】确认操作</li>
+                    </ol>
+                    <div class="doc-tip doc-tip-warn">
+                        ⚠️ <span data-en="Adjusting partition size may cause data loss. Please back up important data before operation. The sum of logical partition sizes cannot exceed the total size of the super partition.">调整分区大小可能导致数据丢失，请提前备份重要数据。逻辑分区大小之和不能超过super分区总大小。</span>
+                    </div>
+
+                    <h3 data-en="Create Logical Partitions">创建逻辑分区</h3>
+                    <ol>
+                        <li data-en="Click [New Partition] in the dynamic partition interface">在动态分区界面点击【新建分区】</li>
+                        <li data-en="Enter partition name, size, and group">输入分区名称、大小和所属group</li>
+                        <li data-en="Click [OK] to create the partition">点击【确定】创建分区</li>
+                    </ol>
+
+                    <h3 data-en="Delete Logical Partitions">删除逻辑分区</h3>
+                    <ol>
+                        <li data-en="Select the logical partition to delete">选择要删除的逻辑分区</li>
+                        <li data-en="Click [Delete] button">点击【删除】按钮</li>
+                        <li data-en="Click [OK] in the confirmation dialog">在确认对话框中点击【确定】</li>
+                    </ol>
+                    <div class="doc-tip doc-tip-danger">
+                        🔴 <span data-en="Deleting a partition will cause all data in the partition to be lost. Please operate carefully.">删除分区将导致分区内所有数据丢失，请谨慎操作。</span>
+                    </div>
+                </div>
+
+                <!-- 重启管理 -->
+                <div class="doc-section anim anim-fade-up" id="reboot">
+                    <h2 class="doc-section-title" data-en="Reboot Management">重启管理<a href="#reboot" class="doc-anchor">#</a></h2>
+                    <p data-en="The reboot management feature allows you to quickly switch between different device modes without using physical buttons or ADB commands.">重启管理功能允许您在不使用物理按键或ADB命令的情况下，快速在不同设备模式间切换。</p>
+                    <ul>
+                        <li data-en="<strong>Restart to System</strong> → Normal Android system"><strong>重启到系统</strong> → 正常的Android系统</li>
+                        <li data-en="<strong>Restart to Recovery</strong> → Recovery mode for flashing, backup, etc."><strong>重启到 Recovery</strong> → 恢复模式，用于刷机、备份等</li>
+                        <li data-en="<strong>Restart to Fastboot</strong> → Bootloader mode for partition operations"><strong>重启到 Fastboot</strong> → Bootloader模式，用于分区操作</li>
+                        <li data-en="<strong>Restart to Fastbootd</strong> → Fastbootd mode for dynamic partition operations"><strong>重启到 Fastbootd</strong> → Fastbootd模式，用于动态分区操作</li>
+                        <li data-en="<strong>Power Off</strong> → Turn off the device"><strong>关机</strong> → 关闭设备</li>
+                        <li data-en="<strong>Restart to EDL</strong> → Emergency Download Mode (for Qualcomm devices)"><strong>重启到 EDL</strong> → 紧急下载模式（高通设备）</li>
+                        <li data-en="<strong>Restart to BROM</strong> → BROM mode (for MediaTek devices)"><strong>重启到 BROM</strong> → BROM模式（联发科设备）</li>
+                    </ul>
+                    <div class="doc-tip doc-tip-info">
+                        💡 <span data-en="Restarting to EDL or BROM mode requires the corresponding driver installed. These modes are typically used for deep repair or flashing.">重启到EDL或BROM模式需要安装对应驱动，这些模式通常用于深度维修或救砖刷机。</span>
+                    </div>
+                </div>
+
+                <!-- 文件管理 -->
+                <div class="doc-section anim anim-fade-up" id="file-mgr">
+                    <h2 class="doc-section-title" data-en="File Management">文件管理<a href="#file-mgr" class="doc-anchor">#</a></h2>
+                    <p data-en="The file management feature allows you to browse, upload, download, and delete files on your device, supporting common file operations.">文件管理功能允许您浏览、上传、下载和删除设备上的文件，支持常用文件操作。</p>
+                    <ul>
+                        <li data-en="<strong>Device File Browser</strong> → Browse file directories on the device"><strong>设备文件浏览器</strong> → 浏览设备上的文件目录</li>
+                        <li data-en="<strong>Upload Files</strong> → Upload files from computer to device"><strong>上传文件</strong> → 将电脑文件上传到设备</li>
+                        <li data-en="<strong>Download Files</strong> → Download files from device to computer"><strong>下载文件</strong> → 将设备文件下载到电脑</li>
+                        <li data-en="<strong>Delete Files</strong> → Delete files or folders"><strong>删除文件</strong> → 删除文件或文件夹</li>
+                        <li data-en="<strong>New Folder</strong> → Create a new folder"><strong>新建文件夹</strong> → 创建新文件夹</li>
+                        <li data-en="<strong>Copy/Move</strong> → Copy or move files"><strong>复制/移动</strong> → 复制或移动文件</li>
+                        <li data-en="<strong>Batch Operations</strong> → Select multiple files for batch processing"><strong>批量操作</strong> → 多选文件进行批量处理</li>
+                    </ul>
+                    <div class="doc-tip doc-tip-info">
+                        💡 <span data-en="Root devices can access more system directories (e.g., /data, /system). Non-root devices can only access storage directories.">Root设备可访问更多系统目录（如/data、/system），非Root设备仅能访问存储目录。</span>
+                    </div>
+                </div>
+
+                <!-- 模块/扩展管理 -->
+                <div class="doc-section anim anim-fade-up" id="extensions">
+                    <h2 class="doc-section-title" data-en="Extensions / Module Management">扩展 / 模块管理<a href="#extensions" class="doc-anchor">#</a></h2>
+                    <p data-en="The toolbox provides a module management feature, allowing users to extend functionality by installing third-party modules.">工具箱提供模块管理功能，用户可以通过安装第三方模块来扩展功能。</p>
+
+                    <h3 data-en="Installing Modules">安装模块</h3>
+                    <ol>
+                        <li data-en="Download the module package (.wxp or .zip file)">下载模块安装包（.wxp或.zip文件）</li>
+                        <li data-en="Open [Extension Manager] → Click [Install Module]">打开【扩展管理】→ 点击【安装模块】</li>
+                        <li data-en="Select the downloaded module file">选择下载的模块文件</li>
+                        <li data-en="Wait for installation to complete">等待安装完成</li>
+                        <li data-en="Restart the toolbox to load the new module">重启工具箱以加载新模块</li>
+                    </ol>
+
+                    <h3 data-en="Available Modules">可用模块</h3>
+                    <ul>
+                        <li data-en="<strong>Payload Unpacker</strong> → Parse OTA update packages, extract partition images"><strong>Payload解包器</strong> → 解析OTA升级包，提取分区镜像</li>
+                        <li data-en="<strong>SELinux Merger</strong> → Merge and edit SELinux policy files"><strong>SELinux策略合并器</strong> → 合并和编辑SELinux策略文件</li>
+                        <li data-en="<strong>Boot Image Tools</strong> → Parse and edit boot image headers"><strong>Boot镜像工具</strong> → 解析和编辑boot镜像头</li>
+                        <li data-en="<strong>Framework Tools</strong> → Analyze APK files, smali editing"><strong>框架工具</strong> → 分析APK文件、smali编辑</li>
+                        <li data-en="<strong>More modules</strong> → Check the official module store for updates"><strong>更多模块</strong> → 关注官方模块商店获取更新</li>
+                    </ul>
+
+                    <h3 data-en="Module Settings">模块设置</h3>
+                    <ul>
+                        <li data-en="Enable/disable modules: Toggle on the right side of the module list">启用/禁用模块：在模块列表右侧切换开关</li>
+                        <li data-en="Module update: Click [Check Update] in the extension manager">模块更新：在扩展管理器中点击【检查更新】</li>
+                        <li data-en="Module uninstall: Right-click the module → [Uninstall]">模块卸载：右键模块 → 【卸载】</li>
+                    </ul>
+                    <div class="doc-tip doc-tip-warn">
+                        ⚠️ <span data-en="Please download modules from official or trusted sources to avoid security risks.">请从官方或可信渠道下载模块，避免安全风险。</span>
+                    </div>
+                </div>
+
+                <!-- 命令行 -->
+                <div class="doc-section anim anim-fade-up" id="command">
+                    <h2 class="doc-section-title" data-en="Command Line">命令行<a href="#command" class="doc-anchor">#</a></h2>
+                    <p data-en="The toolbox has a built-in command line tool that can execute ADB and Fastboot commands directly without installing additional tools.">工具箱内置命令行工具，无需额外安装即可直接执行ADB和Fastboot命令。</p>
+                    <ul>
+                        <li data-en="<strong>ADB Shell</strong> → Execute shell commands on the device"><strong>ADB Shell</strong> → 在设备上执行shell命令</li>
+                        <li data-en="<strong>Fastboot Commands</strong> → Execute Fastboot commands"><strong>Fastboot命令</strong> → 执行Fastboot命令</li>
+                        <li data-en="<strong>Command History</strong> → View previously executed commands"><strong>命令历史</strong> → 查看之前执行的命令</li>
+                        <li data-en="<strong>Script Execution</strong> → Batch execute ADB/Fastboot commands"><strong>脚本执行</strong> → 批量执行ADB/Fastboot命令</li>
+                    </ul>
+                    <p><strong data-en="Common Commands">常用命令示例</strong></p>
+                    <ul>
+                        <li><code data-en="adb devices">adb devices</code> → <span data-en="List connected devices">列出已连接设备</span></li>
+                        <li><code data-en="adb shell reboot recovery">adb shell reboot recovery</code> → <span data-en="Restart device to recovery">重启设备到recovery</span></li>
+                        <li><code data-en="adb install app.apk">adb install app.apk</code> → <span data-en="Install APK file">安装APK文件</span></li>
+                        <li><code data-en="adb pull /sdcard/file.txt">adb pull /sdcard/file.txt</code> → <span data-en="Download file from device">从设备下载文件</span></li>
+                        <li><code data-en="fastboot flash boot boot.img">fastboot flash boot boot.img</code> → <span data-en="Flash boot partition">刷写boot分区</span></li>
+                    </ul>
+                </div>
+
+                <!-- Payload解包器 -->
+                <div class="doc-section anim anim-fade-up" id="payload">
+                    <h2 class="doc-section-title" data-en="Payload Unpacker">Payload 解包器<a href="#payload" class="doc-anchor">#</a></h2>
+                    <p data-en="The Payload Unpacker is a built-in tool for parsing Android OTA update packages, extracting partition images, and facilitating ROM research and development.">Payload解包器是一款用于解析Android OTA升级包、提取分区镜像的内置工具，方便ROM研究与开发。</p>
+                    <p><strong data-en="Main Features">主要功能</strong></p>
+                    <ul>
+                        <li data-en="<strong>Parse payload.bin</strong> → Read partition information from OTA packages"><strong>解析 payload.bin</strong> → 读取OTA包中的分区信息</li>
+                        <li data-en="<strong>Extract Partition Images</strong> → Extract specified partition images"><strong>提取分区镜像</strong> → 提取指定分区镜像</li>
+                        <li data-en="<strong>Batch Extraction</strong> → Extract all partition images at once"><strong>批量提取</strong> → 一次性提取所有分区镜像</li>
+                        <li data-en="<strong>Support Multiple Formats</strong> → Support Android 10-14 OTA packages"><strong>支持多版本</strong> → 支持Android 10-14的OTA包</li>
+                    </ul>
+                    <p><strong data-en="Usage Steps">使用步骤</strong></p>
+                    <ol>
+                        <li data-en="Open [Payload Unpacker] module">打开【Payload解包器】模块</li>
+                        <li data-en="Click [Select OTA Package] to choose the OTA zip file">点击【选择OTA包】选择OTA zip文件</li>
+                        <li data-en="The tool automatically parses payload.bin and displays partition list">工具自动解析payload.bin并显示分区列表</li>
+                        <li data-en="Select the partitions to extract">选择需要提取的分区</li>
+                        <li data-en="Click [Extract] to save images to the output directory">点击【提取】将镜像保存到输出目录</li>
+                    </ol>
+                    <div class="doc-tip doc-tip-info">
+                        💡 <span data-en="Decryption of encrypted OTA packages is not supported. Please decrypt first or use official extraction tools.">加密的OTA包不支持直接解包，请先解密或使用官方解包工具。</span>
+                    </div>
+                </div>
+
+                <!-- SELinux策略合并器 -->
+                <div class="doc-section anim anim-fade-up" id="selinux">
+                    <h2 class="doc-section-title" data-en="SELinux Merger">SELinux 策略合并器<a href="#selinux" class="doc-anchor">#</a></h2>
+                    <p data-en="The SELinux Merger is a tool for analyzing and merging SELinux policy files, helping developers understand and modify Android security policies.">SELinux策略合并器是一款用于分析和合并SELinux策略文件的工具，帮助开发者理解和修改Android安全策略。</p>
+                    <p><strong data-en="Main Features">主要功能</strong></p>
+                    <ul>
+                        <li data-en="<strong>Policy Analysis</strong> → Parse SELinux policy files, display type, rule information"><strong>策略分析</strong> → 解析SELinux策略文件，展示类型、规则信息</li>
+                        <li data-en="<strong>Rule Merge</strong> → Merge rule changes from multiple policy files"><strong>规则合并</strong> → 合并多个策略文件中的规则变更</li>
+                        <li data-en="<strong>Difference Comparison</strong> → Compare differences between two policy files"><strong>差异对比</strong> → 对比两个策略文件的差异</li>
+                        <li data-en="<strong>Rule Query</strong> → Search specific type or permission rules"><strong>规则查询</strong> → 搜索特定类型或权限规则</li>
+                    </ul>
+                    <p><strong data-en="Usage Scenarios">使用场景</strong></p>
+                    <ul>
+                        <li data-en="Analyze security policies of custom ROMs">分析自定义ROM的安全策略</li>
+                        <li data-en="Check permission changes after Root/Magisk modifications">检查Root/Magisk修改后的权限变化</li>
+                        <li data-en="Debug SELinux permission denial issues">调试SELinux权限拒绝问题</li>
+                    </ul>
+                </div>
+
+                <!-- 常见问题 -->
+                <div class="doc-section anim anim-fade-up" id="faq">
+                    <h2 class="doc-section-title" data-en="FAQ">常见问题<a href="#faq" class="doc-anchor">#</a></h2>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="Device not recognized?">设备无法识别？</h3>
+                        <p data-en="Please check: 1) USB debugging is enabled; 2) Use original data cable; 3) Install ADB driver; 4) Try replacing USB interface.">请检查：1）已开启USB调试；2）使用原装数据线；3）安装ADB驱动；4）尝试更换USB接口。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="How to enter Fastboot mode?">如何进入Fastboot模式？</h3>
+                        <p data-en="Power off the phone, then hold Volume Down + Power simultaneously until the Fastboot interface appears. Some models need to connect the data cable while holding Volume Down.">将手机关机后，同时按住音量减键+电源键不放，直到进入Fastboot界面。部分机型需要按住音量减键的同时插入数据线。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="How to exit Fastboot mode?">如何退出Fastboot模式？</h3>
+                        <p data-en="Hold the Power button for 10+ seconds to force restart, or use the reboot management feature to restart to system.">长按电源键10秒以上强制重启，或使用工具箱的重启管理功能重启到系统。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="Does flashing erase data?">刷机是否会清除数据？</h3>
+                        <p data-en="Flashing different partitions has different effects: flashing boot, system and other partitions generally does not clear user data; erasing userdata or format data will definitely clear all data. Please back up important data before operation.">刷写不同分区影响不同：刷写boot、system等分区一般不会清除用户数据；擦除userdata或格式化数据分区一定会清空所有数据。操作前请务必备份重要数据。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="How to unlock BL?">如何解锁BL？</h3>
+                        <p data-en="First apply for the unlock code on the official website, then connect the device in Fastboot mode, click [Unlock BL] in the partition management, and enter the unlock code to complete. Note: unlocking BL will erase all data, and some banks and payment apps may not work.">先在官网申请解锁码，然后在Fastboot模式下连接设备，在分区管理中点击【解锁BL】，输入解锁码即可完成。注意：解锁BL会清空所有数据，部分银行和支付类应用可能无法使用。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="How to get Root permissions?">如何获取Root权限？</h3>
+                        <p data-en="First unlock BL, then flash a custom recovery (such as TWRP), and finally flash Magisk or SuperSU in recovery to get Root permissions. The toolbox provides functions for flashing recovery and other images.">先解锁BL，然后刷入第三方Recovery（如TWRP），最后在Recovery中刷入Magisk或SuperSU即可获取Root权限。工具箱提供了刷入Recovery等镜像的功能。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="Why can't I see my storage after connecting?">连接后为什么看不到存储？</h3>
+                        <p data-en="After Android 11, scoped storage is enforced, and file access is restricted. Please use the file management feature to operate, or use ADB command line for access. Root devices can bypass restrictions.">Android 11之后加强了分区存储限制，文件访问受到限制。请使用工具箱的文件管理功能操作，或通过ADB命令行访问。Root设备可绕过限制。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="Dynamic partition devices, how to flash?">动态分区设备如何刷机？</h3>
+                        <p data-en="For dynamic partition devices, first boot to Fastbootd mode, then in the dynamic partition management, select the logical partition to flash. You can also use the [Flash All] feature to flash all partitions at once.">动态分区设备请先启动到Fastbootd模式，然后在动态分区管理中选择要刷入的逻辑分区。也可以使用【一键全刷】功能一次性刷入所有分区。</p>
+                    </div>
+
+                    <div class="doc-faq-item">
+                        <h3 data-en="How to flash OTA upgrade package?">如何刷入OTA升级包？</h3>
+                        <p data-en="Method 1: Use the Payload Unpacker to extract partition images, then flash them one by one; Method 2: Use the [Flash OTA] feature in the toolbox to directly flash OTA zip packages (supports dynamic partition devices).">方式一：使用Payload解包器提取分区镜像，再逐一刷入；方式二：使用工具箱的【刷入OTA】功能直接刷入OTA zip包（支持动态分区设备）。</p>
+                    </div>
+                </div>
+
+                <!-- 页脚 -->
+                <footer class="doc-footer">
+                    <div class="doc-footer-inner">
+                        <div class="doc-footer-top">
+                            <div class="doc-footer-brand">
+                                <span class="doc-logo-mark">❤</span>
+                                <span>技术文档</span>
+                            </div>
+                            <div class="doc-footer-links">
+                                <a href="../index.html" data-en="Home">首页</a>
+                                <a href="../download.html" data-en="Download">下载</a>
+                                <a href="../contact.html" data-en="Contact">联系</a>
+                            </div>
+                        </div>
+                        <div class="doc-footer-bottom">
+                            <span>© 2020 - 2025 没有心科技 NoHeart Tech</span>
+                            <span data-en="All Rights Reserved">保留所有权利</span>
+                        </div>
+                    </div>
+                </footer>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="/static/js/i18n.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../favicon.ico">
+    <title data-en="HyperOS | Redmi Note 8 Pro | NoHeart Tech">Hyper OS | 红米Note 8 Pro | 没有心科技</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+    <link rel="stylesheet" href="../../static/css/animations.css">
+    <link rel="stylesheet" href="../../static/css/search.css">
+    <style>
+        /* ===== 卡片 ===== */
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        @media (max-width: 768px) {
+            .device-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+        .device-card {
+            background: #fff;
+            border: 1px solid #e8ecf1;
+            border-radius: 16px;
+            padding: 40px 32px 36px;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .device-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            border-color: #d0d8e0;
+        }
+        body.dark-mode .device-card {
+            background: #161b22;
+            border-color: #2a3140;
+        }
+        body.dark-mode .device-card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            border-color: #3a4555;
+        }
+        .device-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 10px;
+        }
+        body.dark-mode .device-name {
+            color: #e2e8f0;
+        }
+        .device-desc {
+            font-size: 14px;
+            color: #5a6a7a;
+            line-height: 1.7;
+            margin: 0 0 20px;
+        }
+        body.dark-mode .device-desc {
+            color: #8896a6;
+        }
+        .device-btn {
+            display: inline-block;
+            padding: 10px 36px;
+            border-radius: 8px;
+            background: #1a73e8;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .device-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(26, 115, 232, 0.4);
+        }
+
+        /* ===== 分区标题 ===== */
+        .rom-section {
+            margin-bottom: 64px;
+        }
+        .rom-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a2332;
+            margin: 0 0 6px;
+        }
+        .rom-section-title::before {
+            content: '';
+            width: 6px;
+            height: 26px;
+            border-radius: 3px;
+            background: #1a73e8;
+            flex-shrink: 0;
+        }
+        body.dark-mode .rom-section-title {
+            color: #e2e8f0;
+        }
+        .rom-section-desc {
+            font-size: 14px;
+            color: #5a6a7a;
+            margin: 0 0 24px;
+            padding-left: 16px;
+        }
+        body.dark-mode .rom-section-desc {
+            color: #8896a6;
+        }
+
+        /* ===== banner 系统图标 ===== */
+        .os-banner-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 52px;
+            background: #f0f6ff;
+            border-radius: 28px;
+        }
+        .os-banner-icon-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        body.dark-mode .os-banner-icon {
+            background: #1a2a4a;
+        }
+
+        /* ===== 返回链接 ===== */
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* ===== 筛选栏 ===== */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 16px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            background: #fff;
+            border: 1px solid #e8ecf1;
+            border-radius: 14px;
+        }
+        body.dark-mode .filter-bar {
+            background: #161b22;
+            border-color: #2a3140;
+        }
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .filter-label {
+            font-size: 13px;
+            color: #5a6a7a;
+            font-weight: 600;
+        }
+        body.dark-mode .filter-label {
+            color: #8896a6;
+        }
+        .filter-select {
+            padding: 9px 34px 9px 12px;
+            border: 1px solid #d5dce4;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #1a2332;
+            font-size: 14px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6a7a' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        .filter-select:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+        body.dark-mode .filter-select {
+            background-color: #161b22;
+            border-color: #2a3140;
+            color: #e2e8f0;
+        }
+        .filter-reset {
+            padding: 9px 22px;
+            border: 1px solid #d5dce4;
+            border-radius: 8px;
+            background: #f4f6f9;
+            color: #5a6a7a;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+        .filter-reset:hover {
+            background: #e8edf3;
+            color: #1a2332;
+        }
+        body.dark-mode .filter-reset {
+            background: #1f2733;
+            border-color: #2a3140;
+            color: #8896a6;
+        }
+        body.dark-mode .filter-reset:hover {
+            color: #e2e8f0;
+        }
+        @media (max-width: 768px) {
+            .filter-bar {
+                padding: 16px;
+                gap: 12px;
+            }
+            .filter-item {
+                flex: 1 1 calc(50% - 12px);
+                min-width: 140px;
+            }
+            .filter-select {
+                width: 100%;
+            }
+            .filter-reset {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* ===== 版本表格 ===== */
+        .rom-table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e8ecf1;
+            border-radius: 14px;
+            background: #fff;
+        }
+        body.dark-mode .rom-table-wrap {
+            background: #161b22;
+            border-color: #2a3140;
+        }
+        .rom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 0;
+        }
+        .rom-table th,
+        .rom-table td {
+            white-space: normal;
+            word-break: break-all;
+            overflow-wrap: anywhere;
+        }
+        .rom-table .col-article {
+            white-space: nowrap;
+            width: 1%;
+        }
+        .rom-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a6a7a;
+            background: #f4f6f9;
+            border-bottom: 1px solid #e8ecf1;
+        }
+        body.dark-mode .rom-table th {
+            background: #1f2733;
+            color: #8896a6;
+            border-bottom-color: #2a3140;
+        }
+        .rom-table td {
+            padding: 13px 16px;
+            color: #1a2332;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        body.dark-mode .rom-table td {
+            color: #e2e8f0;
+            border-bottom-color: #212a38;
+        }
+        .rom-table tbody tr {
+            transition: background 0.15s;
+        }
+        .rom-table tbody tr:hover {
+            background: #f8fafc;
+        }
+        body.dark-mode .rom-table tbody tr:hover {
+            background: #1c2430;
+        }
+        .rom-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .rom-table .col-index {
+            width: 56px;
+            color: #8896a6;
+        }
+        .rom-table .col-pkg {
+            font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 340px;
+        }
+        .rom-table .col-md5 {
+            font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+            font-size: 12px;
+            color: #5a6a7a;
+        }
+        body.dark-mode .rom-table .col-md5 {
+            color: #8896a6;
+        }
+        .rom-table .col-article a {
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 6px;
+            background: #1a73e8;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .rom-table .col-article a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(26, 115, 232, 0.35);
+        }
+        .rom-empty {
+            display: none;
+            padding: 48px 24px;
+            text-align: center;
+            color: #8896a6;
+            font-size: 14px;
+        }
+
+        /* ===== 占位卡片 ===== */
+        .rom-placeholder {
+            border-style: dashed;
+            border-color: #c5cdd8;
+        }
+        body.dark-mode .rom-placeholder {
+            border-color: #3a4555;
+        }
+        .rom-placeholder-grid {
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 769px) {
+            .rom-placeholder-grid {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    /* ===== 包名气泡 ===== */
+        .pkg-tooltip {
+            position: fixed;
+            z-index: 9999;
+            background: #1a2332;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+            max-width: min(90vw, 600px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            pointer-events: none;
+            transform: translate(-50%, -100%);
+        }
+        body.dark-mode .pkg-tooltip {
+            background: #e2e8f0;
+            color: #1a2332;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="../../favicon.ico" alt="没有心科技" class="logo-icon">
+                <a href="../../index.html" class="logo-text" data-en="NoHeart Tech">没有心科技</a>
+            </div>
+            <div class="menu-section">
+                <nav class="main-menu">
+                    <a href="../../index.html" class="menu-item" data-en="Home">首页</a>
+                    <a href="../index.html" class="menu-item active" data-en="ROM">机型分区</a>
+                    <a href="../../tools/index.html" class="menu-item" data-en="Wuxin Tools">无心工具箱</a>
+                    <a href="#" class="menu-item" data-en="Community">社区论坛</a>
+                    <a href="../../docs/index.html" class="menu-item" data-en="Tutorial">教程文档</a>
+                    <a href="../../contact.html" class="menu-item" data-en="Contact">联系我们</a>
+                </nav>
+                <div class="custom-functions">
+                    <div class="search-box">
+                        <span class="search-box-icon">🔍</span>
+                        <input type="text" class="search-input" placeholder="搜索…" data-en="Search…" autocomplete="off">
+                        <div class="search-dropdown"></div>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle btn-press" aria-label="切换主题">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text" data-en="Light">主题</span>
+                    </button>
+                    <button id="hamburger-btn" class="hamburger-btn btn-press" aria-label="打开菜单">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <nav id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-header">
+            <span class="mobile-menu-title" data-en="Menu">菜单</span>
+            <button id="mobile-menu-close" class="mobile-menu-close btn-press" aria-label="关闭菜单">&times;</button>
+        </div>
+        <a href="../../index.html" class="mobile-menu-item" data-en="Home">首页</a>
+        <a href="../index.html" class="mobile-menu-item active" data-en="ROM">机型分区</a>
+        <a href="../../tools/index.html" class="mobile-menu-item" data-en="Wuxin Tools">无心工具箱</a>
+        <a href="#" class="mobile-menu-item" data-en="Community">社区论坛</a>
+        <a href="../../docs/index.html" class="mobile-menu-item" data-en="Tutorial">教程文档</a>
+        <a href="../../contact.html" class="mobile-menu-item" data-en="Contact">联系我们</a>
+        <div class="mobile-menu-search">
+            <span class="search-box-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="搜索…" data-en="Search…" autocomplete="off">
+            <div class="search-dropdown"></div>
+        </div>
+        <div class="mobile-menu-divider"></div>
+        <button id="mobile-theme-toggle" class="mobile-theme-toggle btn-press">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text" data-en="Light">切换主题</span>
+        </button>
+    </nav>
+
+    <main class="rom-detail-page">
+        <section class="banner" style="padding:64px 0 48px;">
+            <div class="banner-container" style="flex-direction:column;text-align:center;">
+                <div class="os-banner-icon hero-enter"><img src="../../static/images/hyperos.png" alt="Hyper OS" class="os-banner-icon-img"></div>
+                <h1 class="banner-title hero-enter" data-en="HyperOS" style="font-size:40px;">Hyper OS</h1>
+                <p class="banner-desc hero-enter hero-enter-d1" data-en="Xiaomi's new generation system, all-round evolution in performance and connectivity" style="max-width:600px;margin:16px auto 0;">小米全新一代系统，性能与互联全面进化</p>
+                <a href="../note8pro.html" class="back-link hero-enter hero-enter-d2" data-en="←Back to Redmi Note 8 Pro">←返回红米Note 8 Pro</a>
+            </div>
+        </section>
+
+        <div class="rom-container" style="max-width:1200px;margin:0 auto;padding:0 24px 80px;">
+
+            <!-- ===== 版本列表 ===== -->
+            <section class="rom-section anim anim-fade-up">
+                <h2 class="rom-section-title" data-en="Versions">版本列表</h2>
+                <p class="rom-section-desc" data-en="Versions for Redmi Note 8 Pro, filter by version number, Android version or release date">红米Note 8 Pro 的版本列表，支持按版本号、安卓版本、发布时间筛选</p>
+
+                <div class="filter-bar">
+                    <div class="filter-item">
+                        <label class="filter-label" for="filter-ver" data-en="Version">版本：</label>
+                        <select id="filter-ver" class="filter-select"></select>
+                    </div>
+                    <div class="filter-item">
+                        <label class="filter-label" for="filter-android" data-en="Android Version">安卓版本</label>
+                        <select id="filter-android" class="filter-select"></select>
+                    </div>
+                    <div class="filter-item">
+                        <label class="filter-label" for="filter-date" data-en="Release Date">发布时间</label>
+                        <select id="filter-date" class="filter-select"></select>
+                    </div>
+                    <button id="filter-reset" class="filter-reset btn-press" data-en="Reset">重置</button>
+                </div>
+
+                <div class="rom-table-wrap">
+                    <table class="rom-table">
+                        <thead>
+                            <tr>
+                                <th class="col-index" data-en="#">序号</th>
+                                <th data-en="Package Name">包名</th>
+                                <th data-en="Version">版本：</th>
+                                <th data-en="Android Version">安卓版本</th>
+                                <th data-en="Release Date">发布时间</th>
+                                <th data-en="MD5">MD5</th>
+                                <th data-en="Actions">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rom-tbody"></tbody>
+                    </table>
+                    <div id="rom-empty" class="rom-empty" data-en="No matching versions. Try adjusting the filters.">暂无匹配版本，试试调整筛选条件</div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- 技术支持 -->
+            <div class="footer-support">
+                <div class="footer-support-title" data-en="Technical Support">技术支持</div>
+                <div class="footer-support-list">
+                    <div class="footer-support-item">
+                        <img src="../../static/images/kybll.png" alt="空雨不流泪" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name sponsor-name">
+                                <a href="https://www.kybll.cn/" target="_blank" rel="noopener">空雨不流泪</a>
+                            </span>
+                            <span class="footer-support-desc" data-en="Where dreams begin">梦想起源，无限进步！</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/wuxin.jpg" alt="٩(*´躺平虾`*)۶" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name sponsor-name">
+                                <a href="https://wpa.qq.com/msgrd?v=3&uin=2096477910&site=qq&menu=yes" target="_blank" rel="noopener" data-en="٩(*´躺平虾`*)۶">٩(*´躺平虾`*)۶</a>
+                            </span>
+                            <span class="footer-support-desc" data-en="Miku fan">憨憨初音酱</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/ysyplat.webp" alt="YSYPLAT" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name"><a href="https://www.ysyplat.com/" target="_blank" rel="noopener" data-en="YSYPLAT">屿笙云平台</a></span>
+                            <span class="footer-support-desc" data-en="Server &amp; CDN">提供服务器与CDN加速支持</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/eo.png" alt="Edgeone" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name" data-en="Edgeone">Edgeone</span>
+                            <span class="footer-support-desc" data-en="DDoS &amp; acceleration">提供防御与加速支持</span>
+                        </div>
+                    </div>
+                    <div class="footer-support-item">
+                        <img src="../../static/images/cf.png" alt="Cloudflare" class="footer-support-icon-img">
+                        <div class="footer-support-info">
+                            <span class="footer-support-name" data-en="Cloudflare">Cloudflare</span>
+                            <span class="footer-support-desc" data-en="DDoS &amp; acceleration">提供防御与加速支持</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright" data-en="&copy; 2025-2026 NoHeart Tech. All Rights Reserved.">&copy; 2025-2026 没有心科技. All Rights Reserved.</p>
+                <div class="footer-beian" data-en=" ">
+                    <a class="footer-icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">浙ICP备2023036308号-9</a>
+                    <a class="footer-gabeian" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33019202003173" target="_blank" rel="noopener">
+                        <img src="../../static/images/gabeian.png" alt="" class="gabeian-icon">浙公网安备33019202003173号
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../static/js/theme.js"></script>
+    <script src="../../static/js/page-transition.js"></script>
+    <script src="../../static/js/animations.js"></script>
+    <script src="../../static/js/img-protect.js"></script>
+    <script src="../../static/js/config.js"></script>
+    <script src="../../static/js/i18n.js"></script>
+   <script src="../../static/js/search.js"></script>
+    <script>
+    // ============================================================
+    // HyperOS 版本列表 - 数据 + 筛选渲染
+    // 依赖: i18n.js (window.i18n) 提供语言判断、langchange 事件
+    // ============================================================
+    (function () {
+        'use strict';
+
+        // 版本数据（idx 为发布序号，新发布的版本绑定下一个序号；article 为文章页地址，后续填充）
+        var ROM_DATA = [
+            { idx: 1, pkg: 'begonia_HyperOS_V1.0.9.0.RGGCNXM_6132526ce3_11.0.zip', ver: '1.0.9.0', android: 'Android 11', date: '2023-11-09', md5: '6132526ce3', article: '#' },
+            { idx: 2, pkg: 'begonia_HyperOS_V1.0.9.0.RGGCNXM_6a1e3fa63e_11.0-R2.zip', ver: '1.0.9.0', android: 'Android 11', date: '2023-11-09', md5: '6a1e3fa63e', article: '#' },
+            { idx: 3, pkg: 'begonia_HyperOS_V1.0.9.0.RGGCNXM_28355c2a27_11.0-R3.zip', ver: '1.0.9.0', android: 'Android 11', date: '2023-11-09', md5: '28355c2a27', article: '#' },
+            { idx: 4, pkg: 'begonia_HyperOS_V1.0.11.0.RGGCNXM_b8f8383795_11.0-R4.zip', ver: '1.0.11.0', android: 'Android 11', date: '2023-11-13', md5: 'b8f8383795', article: '#' },
+            { idx: 5, pkg: 'begonia_OS1.0.12.0.RGGCNXM_8e52e99467_11.0-R5.zip', ver: '1.0.12.0', android: 'Android 11', date: '2023-12-06', md5: '8e52e99467', article: '#' },
+            { idx: 6, pkg: 'begonia_OS1.0.13.0.RGGCNXM_891067548a_11.0-R6.zip', ver: '1.0.13.0', android: 'Android 11', date: '2024-01-08', md5: '891067548a', article: '#' },
+            { idx: 7, pkg: 'miui_BEGONIA_OS1.0.15.0.UGGCNXM_156774bb0d_14.0-R1.zip', ver: '1.0.15.0', android: 'Android 14', date: '2024-07-01', md5: '156774bb0d', article: '#' },
+            { idx: 8, pkg: 'miui_BEGONIA_OS1.0.15.0.UGGCNXM_b2846715e3_14.0-R2-Fix.zip', ver: '1.0.15.0', android: 'Android 14', date: '2024-07-02', md5: 'b2846715e3', article: '#' },
+            { idx: 9, pkg: 'miui_BEGONIA_OS1.0.15.0.UGGCNXM_9f955288dd_14.0-R3.zip', ver: '1.0.15.0', android: 'Android 14', date: '2024-07-05', md5: '9f955288dd', article: '#' },
+            { idx: 10, pkg: 'miui_BEGONIA_OS1.0.15.0.UGGCNXM_bf410a22cf_14.0-R4fix.zip', ver: '1.0.15.0', android: 'Android 14', date: '2024-07-13', md5: 'bf410a22cf', article: '#' },
+            { idx: 11, pkg: 'miui_BEGONIA_OS1.0.17.0.UGGCNXM_5b98264fcd_14.0-R5.zip', ver: '1.0.17.0', android: 'Android 14', date: '2024-08-03', md5: '5b98264fcd', article: '#' },
+            { idx: 12, pkg: 'miui_BEGONIA_OS1.0.17.0.UGGCNXM_cbde98a43b_14.0-R6.zip', ver: '1.0.17.0', android: 'Android 14', date: '2024-08-17', md5: 'cbde98a43b', article: '#' },
+            { idx: 13, pkg: 'begonia-ota_full-OS1.0.19.0.UGGCNXM-user-14.0-R7-547b9ec2be.zip', ver: '1.0.19.0', android: 'Android 14', date: '2024-09-28', md5: '547b9ec2be', article: '#' },
+            { idx: 14, pkg: 'begonia-ota_full-OS1.0.22.0.UGGCNXM-user-14.0-R8-c2c5dbd079.zip', ver: '1.0.22.0', android: 'Android 14', date: '2024-12-02', md5: 'c2c5dbd079', article: '#' },
+            { idx: 15, pkg: 'begonia-ota_full-OS1.0.23.0.UGGCNXM-user-14.0-R9-b86d787dcc.zip', ver: '1.0.23.0', android: 'Android 14', date: '2024-12-22', md5: 'b86d787dcc', article: '#' },
+            { idx: 16, pkg: 'begonia-ota_full-OS2.0.3.0.UGGCNXM-user-14.0-R1-35309145ba.zip', ver: '2.0.3.0', android: 'Android 14', date: '2025-02-08', md5: '35309145ba', article: '#' },
+            { idx: 17, pkg: 'begonia-ota_full-OS2.0.102.0.UGGCNXM-user-14.0-R2-55a7010e48.zip', ver: '2.0.102.0', android: 'Android 14', date: '2025-03-24', md5: '55a7010e48', article: '#' },
+            { idx: 18, pkg: 'begonia-ota_full-OS2.0.103.0.UGGCNXM-user-14.0-R3-d07c95000c.zip', ver: '2.0.103.0', android: 'Android 14', date: '2025-04-02', md5: 'd07c95000c', article: '#' },
+            { idx: 19, pkg: 'begonia-ota_full-OS2.0.105.0.UGGCNXM-user-14.0-R4-30b5d75825.zip', ver: '2.0.105.0', android: 'Android 14', date: '2025-05-29', md5: '30b5d75825', article: '#' },
+            { idx: 20, pkg: 'begonia-ota_full-OS2.0.107.0.UGGCNXM-user-14.0-R5-6ba4bbe8a6.zip', ver: '2.0.107.0', android: 'Android 14', date: '2025-07-01', md5: '6ba4bbe8a6', article: '#' },
+            { idx: 21, pkg: 'begonia-ota_full-OS2.0.120.0.UGGCNXM-user-14.0-R6-6153c7fab171.zip', ver: '2.0.120.0', android: 'Android 14', date: '2025-11-09', md5: '6153c7fab171', article: '#' },
+            { idx: 22, pkg: 'begonia-ota_full-OS2.0.127.0.UGGCNXM-user-14.0-R7-8c31236cdf.zip', ver: '2.0.127.0', android: 'Android 14', date: '2026-01-13', md5: '8c31236cdf', article: '#' },
+            { idx: 23, pkg: 'begonia-ota_full-OS2.0.129.0.UGGCNXM-user-14.0-R8-2f5f46008f.zip', ver: '2.0.129.0', android: 'Android 14', date: '2026-03-17', md5: '2f5f46008f', article: '#' },
+            { idx: 24, pkg: 'begonia-ota_full-OS2.0.200.0.UGGCNXM-user-14.0-R9-1c047a3467.zip', ver: '2.0.200.0', android: 'Android 14', date: '2026-07-03', md5: '1c047a3467', article: '#' },
+            { idx: 25, pkg: 'begonia-ota_full-OS3.0.304.0.WGGCNXM-user-16.0-R1-26e42358a2.zip', ver: '3.0.304.0', android: 'Android 16', date: '2026-07-10', md5: '26e42358a2', article: '#' },
+            { idx: 26, pkg: 'begonia-ota_full-OS3.0.304.0.WGGCNXM-user-16.0-R1(HOTFIX)-7b5f9eb767.zip', ver: '3.0.304.0', android: 'Android 16', date: '2026-07-13', md5: '7b5f9eb767', article: '#' }
+        ];
+
+        var tbody = document.getElementById('rom-tbody');
+        var emptyEl = document.getElementById('rom-empty');
+        var selVer = document.getElementById('filter-ver');
+        var selAndroid = document.getElementById('filter-android');
+        var selDate = document.getElementById('filter-date');
+
+        // 数组去重（保持出现顺序）
+        function uniq(arr) {
+            var seen = {};
+            return arr.filter(function (v) {
+                if (seen[v]) return false;
+                seen[v] = true;
+                return true;
+            });
+        }
+
+        // 填充下拉框（首项为"全部"，文本跟随语言）
+        function fillSelect(sel, values) {
+            var allText = (window.i18n && window.i18n.isEn()) ? 'All' : '全部';
+            sel.innerHTML = '';
+            var allOpt = document.createElement('option');
+            allOpt.value = 'all';
+            allOpt.textContent = allText;
+            sel.appendChild(allOpt);
+            values.forEach(function (v) {
+                var opt = document.createElement('option');
+                opt.value = v;
+                opt.textContent = v;
+                sel.appendChild(opt);
+            });
+            sel.value = 'all';
+        }
+
+        // 提取前两段版本号，如 1.0.1.0 -> 1.0、3.0 -> 13.0
+        function verPrefix(v) {
+            return v.split('.').slice(0, 2).join('.');
+        }
+
+        // 重建筛选选项（版本号按主版本号分组，如 1.0 / 1.1 / 2.0）
+        function buildFilters() {
+            fillSelect(selVer, uniq(ROM_DATA.map(function (r) { return verPrefix(r.ver); })));
+            fillSelect(selAndroid, uniq(ROM_DATA.map(function (r) { return r.android; })));
+            fillSelect(selDate, uniq(ROM_DATA.map(function (r) { return r.date.slice(0, 7); })));
+        }
+
+        // 渲染表格
+        function render() {
+            var ver = selVer.value;
+            var and = selAndroid.value;
+            var dt = selDate.value;
+            var rows = ROM_DATA.filter(function (r) {
+                return (ver === 'all' || r.ver === ver || r.ver.indexOf(ver + '.') === 0) &&
+                       (and === 'all' || r.android === and) &&
+                       (dt === 'all' || r.date.indexOf(dt) === 0);
+            }).reverse(); // 倒序，最新的在最上面
+            var articleText = (window.i18n && window.i18n.isEn()) ? 'View Details' : '查看详情';
+            tbody.innerHTML = rows.map(function (r) {
+                return '<tr>' +
+                    '<td class="col-index">' + r.idx + '</td>' +
+                    '<td class="col-pkg" title="' + r.pkg + '">' + r.pkg + '</td>' +
+                    '<td>' + r.ver + '</td>' +
+                    '<td>' + r.android + '</td>' +
+                    '<td>' + r.date + '</td>' +
+                    '<td class="col-md5">' + r.md5 + '</td>' +
+                    '<td class="col-article"><a href="' + r.article + '" class="btn-press">' + articleText + '</a></td>' +
+                    '</tr>';
+            }).join('');
+            emptyEl.style.display = rows.length ? 'none' : 'block';
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            buildFilters();
+            render();
+            selVer.addEventListener('change', render);
+            selAndroid.addEventListener('change', render);
+            selDate.addEventListener('change', render);
+            document.getElementById('filter-reset').addEventListener('click', function () {
+                selVer.value = 'all';
+                selAndroid.value = 'all';
+                selDate.value = 'all';
+                render();
+            });
+            // 语言切换后重置"全部"选项并重渲染
+            document.addEventListener('langchange', function () {
+                buildFilters();
+                render();
+            });
+        });
+    })();
+    </script>
+    <script>
+    // 包名气泡 - 移动端点击显示完整包名，点击任意位置消失
+    (function () {
+        'use strict';
+        var tip = null;
+        document.addEventListener('click', function (e) {
+            var target = e.target.closest('.col-pkg');
+            if (tip) { tip.remove(); tip = null; }
+            if (target) {
+                tip = document.createElement('div');
+                tip.className = 'pkg-tooltip';
+                tip.textContent = target.textContent;
+                var rect = target.getBoundingClientRect();
+                tip.style.left = (rect.left + rect.width / 2) + 'px';
+                tip.style.top = (rect.top - 8) + 'px';
+                document.body.appendChild(tip);
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

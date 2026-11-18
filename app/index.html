@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>XFCE 社区</title>
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- 顶部栏 -->
+    <header class="topbar glass">
+      <div class="topbar-inner">
+        <div class="brand">XFCE<span class="brand-dot">·</span>社区</div>
+        <div class="topbar-search">
+          <input type="search" id="globalSearch" placeholder="搜索文章 / ROM / 讨论" />
+        </div>
+        <div class="topbar-user" id="topbarUser"></div>
+      </div>
+    </header>
+
+    <!-- 主内容区：四 Tab 页面 -->
+    <main class="page-host" id="pageHost">
+      <section class="page" data-page="home" id="page-home"></section>
+      <section class="page hidden" data-page="rom" id="page-rom"></section>
+      <section class="page hidden" data-page="forum" id="page-forum"></section>
+      <section class="page hidden" data-page="me" id="page-me"></section>
+    </main>
+
+    <!-- 底部四 Tab 导航 -->
+    <nav class="tabbar glass">
+      <button class="tab active" data-tab="home">
+        <span class="tab-ico">🏠</span><span class="tab-txt">首页</span>
+      </button>
+      <button class="tab" data-tab="rom">
+        <span class="tab-ico">📦</span><span class="tab-txt">ROM</span>
+      </button>
+      <button class="tab" data-tab="forum">
+        <span class="tab-ico">💬</span><span class="tab-txt">讨论</span>
+      </button>
+      <button class="tab" data-tab="me">
+        <span class="tab-ico">👤</span><span class="tab-txt">我的</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- 全局浮层挂载点 -->
+  <div id="overlayRoot"></div>
+  <div id="toastRoot"></div>
+
+  <!-- 社区前端配置（生产改 apiBase 为 https://api.xfce.cn） -->
+  <script>
+    window.NOHEART_CONFIG = { apiBase: '/api' };
+  </script>
+
+  <!-- 依赖脚本（顺序加载） -->
+  <script src="/static/js/config.js"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/store.js"></script>
+  <script src="/static/js/ui.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/pages/home.js"></script>
+  <script src="/static/js/pages/rom.js"></script>
+  <script src="/static/js/pages/forum.js"></script>
+  <script src="/static/js/pages/me.js"></script>
+</body>
+</html>
